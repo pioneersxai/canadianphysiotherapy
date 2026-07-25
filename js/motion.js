@@ -29,9 +29,9 @@
     ];
     var existing = heroTargets.filter(function (sel) { return document.querySelector(sel); });
     if (existing.length) {
-      gsap.set(existing, { opacity: 0, y: 26 });
+      gsap.set(existing, { opacity: 0, y: 16 });
       gsap.to(existing, {
-        opacity: 1, y: 0, duration: 1, ease: EASE, stagger: 0.12, delay: 0.15
+        opacity: 1, y: 0, duration: 0.5, ease: EASE, stagger: 0.06, delay: 0.05
       });
     }
 
@@ -41,13 +41,36 @@
       revealEls.forEach(function (el) {
         // Hero elements already handled above — skip to avoid double-animating.
         if (el.closest('.hero')) return;
-        gsap.set(el, { opacity: 0, y: 24 });
+        gsap.set(el, { opacity: 0, y: 16 });
         gsap.to(el, {
-          opacity: 1, y: 0, duration: 0.8, ease: EASE,
-          scrollTrigger: { trigger: el, start: 'top 88%', once: true }
+          opacity: 1, y: 0, duration: 0.45, ease: EASE,
+          scrollTrigger: { trigger: el, start: 'top 92%', once: true }
         });
       });
     }
+
+    // ── Abstract hero glow: slow orb drift + counter-rotating rings ──
+    // Each orb gets its own gentle, non-repeating-looking drift path
+    // (different duration/direction per orb avoids a robotic synced feel).
+    var orbs = document.querySelectorAll('.glow-orb');
+    var drift = [
+      { x: 18, y: -14, duration: 7 },
+      { x: -16, y: 12, duration: 9 },
+      { x: 12, y: 16, duration: 6 }
+    ];
+    orbs.forEach(function (orb, i) {
+      var d = drift[i % drift.length];
+      gsap.to(orb, {
+        x: d.x, y: d.y, duration: d.duration, ease: 'sine.inOut',
+        yoyo: true, repeat: -1
+      });
+    });
+    var r1 = document.querySelector('.glow-ring.r1');
+    var r2 = document.querySelector('.glow-ring.r2');
+    if (r1) gsap.to(r1, { rotation: 360, duration: 40, ease: 'none', repeat: -1, transformOrigin: '50% 50%' });
+    if (r2) gsap.to(r2, { rotation: -360, duration: 28, ease: 'none', repeat: -1, transformOrigin: '50% 50%' });
+    var core = document.querySelector('.glow-core');
+    if (core) gsap.to(core, { scale: 1.4, opacity: .6, duration: 1.8, ease: 'sine.inOut', yoyo: true, repeat: -1, transformOrigin: '50% 50%' });
 
     // ── Nicer hover lift on cards (spring-like, not linear) ──
     document.querySelectorAll('.service-card, .team-card, .medical-card, .branch-card, .testimonial').forEach(function (card) {
