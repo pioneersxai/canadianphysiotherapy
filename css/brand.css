@@ -77,29 +77,48 @@ nav.scrolled {
   .hamburger { display: block; }
 }
 
-/* ── SIGNATURE MOTIF: ANIMATED ANATOMY / JOINT GRAPHIC ──
-   Used in the hero and on every service card. A simple looping
-   SVG joint diagram with a pulsing/glowing pain-zone dot tied to
-   the relevant body part (shoulder / spine / knee / elbow / ankle). */
+/* ── SIGNATURE MOTIF: ANIMATED HUMAN ANATOMY GRAPHIC ──
+   A stylized human silhouette (head + torso) with a real two-segment
+   articulated arm — upper arm rotates at the shoulder, forearm rotates
+   at the elbow, each around its own true pivot point — performing a
+   slow shoulder-raise (the exact "shoulder lifting" motion from the
+   brief). The shoulder joint glows/pulses as the highlighted pain zone.
+   Used large in the hero and as a small variant on every service card. */
 .joint-graphic { width: 100%; max-width: 340px; margin: 0 auto; }
-.joint-graphic svg { width: 100%; height: auto; display: block; }
-.joint-pain-zone {
-  animation: jointPulse 2.2s ease-in-out infinite;
-  transform-origin: center;
+.joint-graphic svg { width: 100%; height: auto; display: block; overflow: visible; }
+
+.anatomy-torso { fill: url(#torsoGradient); }
+.anatomy-head  { fill: url(#torsoGradient); }
+
+.anatomy-upper-arm {
+  stroke: var(--gold); stroke-width: 14; stroke-linecap: round; fill: none;
+  transform-origin: 120px 78px;
+  animation: raiseUpperArm 4s ease-in-out infinite;
+}
+.anatomy-forearm {
+  stroke: var(--gold-light); stroke-width: 12; stroke-linecap: round; fill: none;
+  transform-origin: 146px 128px;
+  animation: raiseForearm 4s ease-in-out infinite;
+}
+@keyframes raiseUpperArm { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(-32deg); } }
+@keyframes raiseForearm  { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(-18deg); } }
+
+.anatomy-joint {
+  fill: var(--rose);
+  animation: jointPulse 2s ease-in-out infinite;
+  transform-origin: 120px 78px;
 }
 @keyframes jointPulse {
-  0%, 100% { opacity: .55; r: 10; filter: drop-shadow(0 0 0px var(--rose)); }
-  50%      { opacity: 1;   r: 15; filter: drop-shadow(0 0 12px var(--rose)); }
+  0%, 100% { opacity: .6; filter: drop-shadow(0 0 0px var(--rose)); }
+  50%      { opacity: 1;  filter: drop-shadow(0 0 14px var(--rose)); }
 }
-.joint-limb { stroke: var(--gold); stroke-width: 6; stroke-linecap: round; fill: none; }
-.joint-limb.limb-a { animation: limbSwingA 3.4s ease-in-out infinite; transform-origin: 100px 100px; }
-.joint-limb.limb-b { animation: limbSwingB 3.4s ease-in-out infinite; transform-origin: 100px 100px; }
-@keyframes limbSwingA { 0%,100% { transform: rotate(-6deg); } 50% { transform: rotate(10deg); } }
-@keyframes limbSwingB { 0%,100% { transform: rotate(6deg); }  50% { transform: rotate(-10deg); } }
 
-/* Small inline variant used on service cards */
+/* Small variant on service cards — same articulated-limb idea, scaled down */
+.service-joint-mini .anatomy-upper-arm { stroke-width: 7; transform-origin: 50px 30px; animation-duration: 2.2s; }
+.service-joint-mini .anatomy-forearm   { stroke-width: 6; transform-origin: 66px 52px; animation-duration: 2.2s; }
+.service-joint-mini .anatomy-joint     { transform-origin: 50px 30px; }
+
 .service-joint-mini { width: 56px; height: 56px; opacity: .9; }
-.service-joint-mini .joint-pain-zone { animation-duration: 1.8s; }
 
 /* ── HERO (teal instead of flat navy/black, motion background) ── */
 .hero {
@@ -123,7 +142,9 @@ nav.scrolled {
 
 /* ── SERVICE CARDS with joint graphic + hover motion ── */
 .service-card { position: relative; overflow: hidden; }
-.service-card:hover .service-joint-mini .joint-pain-zone { animation-duration: .9s; }
+.service-card:hover .service-joint-mini .anatomy-joint,
+.service-card:hover .service-joint-mini .anatomy-upper-arm,
+.service-card:hover .service-joint-mini .anatomy-forearm { animation-duration: .9s; }
 .service-card-img { height: 160px; border-radius: 12px; overflow: hidden; margin-bottom: 16px; }
 .service-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
 .service-card:hover .service-card-img img { transform: scale(1.06); }
