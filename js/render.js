@@ -38,26 +38,17 @@
     });
   }
 
-  function jointSvg() {
-    // Small version of the hero's articulated arm: upper arm rotates at the
-    // shoulder (50,30), forearm rotates independently at the elbow (66,52) —
-    // same two real pivot points, just scaled down for the service card.
-    return '<svg viewBox="0 0 100 100" class="service-joint-mini" aria-hidden="true">' +
-      '<path class="anatomy-upper-arm" d="M50,30 L66,52" />' +
-      '<path class="anatomy-forearm" d="M66,52 L52,74" />' +
-      '<circle class="anatomy-joint" cx="50" cy="30" r="6" />' +
-    '</svg>';
-  }
-
   function renderServices() {
     var grid = document.getElementById('servicesGrid');
     if (!grid || !window.BRAND) return;
     BRAND.services.forEach(function (s, i) {
+      // Each service photo already has a real anatomical highlight overlay
+      // baked in by the client (skeletal/pain-zone graphic on real patient
+      // photography) — no separate icon graphic needed on top of it.
       grid.appendChild(el(
         '<div class="service-card fade-in">' +
           '<div class="service-card-img"><img src="' + s.image + '" alt="' + s.name + '" loading="lazy"></div>' +
           '<span class="service-number">' + String(i + 1).padStart(2, '0') + '</span>' +
-          jointSvg() +
           '<h3 class="service-title">' + s.name + '</h3>' +
           '<p class="service-description"><strong>' + s.tagline + '.</strong> ' + s.description + '</p>' +
           '<a href="' + s.link + '" class="btn btn-secondary btn-service">Learn More</a>' +
