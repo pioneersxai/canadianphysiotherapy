@@ -77,48 +77,52 @@ nav.scrolled {
   .hamburger { display: block; }
 }
 
-/* ── SIGNATURE MOTIF: ANIMATED HUMAN ANATOMY GRAPHIC ──
-   A stylized human silhouette (head + torso) with a real two-segment
-   articulated arm — upper arm rotates at the shoulder, forearm rotates
-   at the elbow, each around its own true pivot point — performing a
-   slow shoulder-raise (the exact "shoulder lifting" motion from the
-   brief). The shoulder joint glows/pulses as the highlighted pain zone.
-   Used large in the hero and as a small variant on every service card. */
-.joint-graphic { width: 100%; max-width: 340px; margin: 0 auto; }
-.joint-graphic svg { width: 100%; height: auto; display: block; overflow: visible; }
-
-.anatomy-torso { fill: url(#torsoGradient); }
-.anatomy-head  { fill: url(#torsoGradient); }
-
-.anatomy-upper-arm {
-  stroke: var(--gold); stroke-width: 14; stroke-linecap: round; fill: none;
-  transform-origin: 120px 78px;
-  animation: raiseUpperArm 4s ease-in-out infinite;
+/* ── SIGNATURE MOTIF: LOOPING CLINICAL VIDEO + MEDICAL LABEL CALLOUTS ──
+   Real physiotherapy footage in a framed, glowing video card, annotated
+   with floating medical-term labels — each a pulsing dot connected by a
+   thin line to a label pill, staggered so they light up one at a time
+   like a diagnostic overlay. This replaces an earlier hand-drawn SVG
+   figure that read as amateur clip-art — real footage reads as credible
+   and clinical in a way an illustration attempt couldn't. */
+.video-showcase { position: relative; width: 100%; max-width: 420px; margin: 0 auto; }
+.video-card {
+  position: relative; border-radius: 20px; overflow: hidden; aspect-ratio: 4 / 5;
+  box-shadow: 0 0 0 1px rgba(245,207,119,.25), 0 20px 60px rgba(0,0,0,.45);
+  animation: videoGlow 3.5s ease-in-out infinite;
 }
-.anatomy-forearm {
-  stroke: var(--gold-light); stroke-width: 12; stroke-linecap: round; fill: none;
-  transform-origin: 146px 128px;
-  animation: raiseForearm 4s ease-in-out infinite;
+@keyframes videoGlow {
+  0%, 100% { box-shadow: 0 0 0 1px rgba(245,207,119,.25), 0 20px 60px rgba(0,0,0,.45), 0 0 0px rgba(204,51,102,0); }
+  50%      { box-shadow: 0 0 0 1px rgba(245,207,119,.45), 0 20px 60px rgba(0,0,0,.45), 0 0 40px rgba(204,51,102,.35); }
 }
-@keyframes raiseUpperArm { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(-32deg); } }
-@keyframes raiseForearm  { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(-18deg); } }
+.video-card video { width: 100%; height: 100%; object-fit: cover; display: block; filter: saturate(1.05) contrast(1.05); }
+.video-card::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(14,62,64,0) 55%, rgba(14,62,64,.75) 100%);
+  pointer-events: none;
+}
 
-.anatomy-joint {
-  fill: var(--rose);
-  animation: jointPulse 2s ease-in-out infinite;
-  transform-origin: 120px 78px;
+.med-label {
+  position: absolute; display: flex; align-items: center; gap: 8px;
+  background: rgba(250,249,246,.96); color: var(--navy); font-size: .72rem; font-weight: 700;
+  padding: 6px 12px; border-radius: 20px; white-space: nowrap;
+  box-shadow: 0 6px 18px rgba(0,0,0,.25); opacity: 0; transform: translateY(6px);
+  animation: labelReveal 6s ease-in-out infinite;
+}
+.med-label .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--rose); flex-shrink: 0; animation: jointPulse 1.6s ease-in-out infinite; }
+.med-label.l1 { top: 8%;  left: -6%;  animation-delay: 0s; }
+.med-label.l2 { top: 38%; right: -10%; animation-delay: 1.5s; }
+.med-label.l3 { bottom: 22%; left: -10%; animation-delay: 3s; }
+.med-label.l4 { bottom: 4%;  right: -4%; animation-delay: 4.5s; }
+@keyframes labelReveal {
+  0%, 8%   { opacity: 0; transform: translateY(6px); }
+  15%, 40% { opacity: 1; transform: translateY(0); }
+  48%, 100% { opacity: 0; transform: translateY(6px); }
 }
 @keyframes jointPulse {
-  0%, 100% { opacity: .6; filter: drop-shadow(0 0 0px var(--rose)); }
-  50%      { opacity: 1;  filter: drop-shadow(0 0 14px var(--rose)); }
+  0%, 100% { opacity: .6; box-shadow: 0 0 0 0 rgba(204,51,102,.5); }
+  50%      { opacity: 1;  box-shadow: 0 0 0 6px rgba(204,51,102,0); }
 }
-
-/* Small variant on service cards — same articulated-limb idea, scaled down */
-.service-joint-mini .anatomy-upper-arm { stroke-width: 7; transform-origin: 50px 30px; animation-duration: 2.2s; }
-.service-joint-mini .anatomy-forearm   { stroke-width: 6; transform-origin: 66px 52px; animation-duration: 2.2s; }
-.service-joint-mini .anatomy-joint     { transform-origin: 50px 30px; }
-
-.service-joint-mini { width: 56px; height: 56px; opacity: .9; }
+@media (max-width: 992px) { .med-label.l1, .med-label.l3 { left: 2%; } .med-label.l2, .med-label.l4 { right: 2%; } }
 
 /* ── HERO (teal instead of flat navy/black, motion background) ── */
 .hero {
@@ -140,11 +144,8 @@ nav.scrolled {
 .accred-track img { height: 46px; width: auto; object-fit: contain; filter: grayscale(35%); opacity: .85; transition: .3s; }
 .accred-track img:hover { filter: grayscale(0%); opacity: 1; transform: translateY(-2px); }
 
-/* ── SERVICE CARDS with joint graphic + hover motion ── */
+/* ── SERVICE CARDS — real anatomical-overlay photography + hover motion ── */
 .service-card { position: relative; overflow: hidden; }
-.service-card:hover .service-joint-mini .anatomy-joint,
-.service-card:hover .service-joint-mini .anatomy-upper-arm,
-.service-card:hover .service-joint-mini .anatomy-forearm { animation-duration: .9s; }
 .service-card-img { height: 160px; border-radius: 12px; overflow: hidden; margin-bottom: 16px; }
 .service-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
 .service-card:hover .service-card-img img { transform: scale(1.06); }
