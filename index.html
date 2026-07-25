@@ -41,35 +41,43 @@
     </div>
   </nav>
 
-  <!-- HERO -->
+  <!-- HERO — centered, text-first entrance -->
   <section class="hero" id="home">
     <div class="container">
-      <div class="hero-grid">
-        <div class="hero-content">
-          <span class="hero-badge" data-brand="brand-positioning"></span>
-          <h1>Give Your Neck to an Expert</h1>
-          <p class="tagline">A Mix of Asian Alternative Therapy, Canadian Physio Protocols, Rehab Programs, and Bone Osteopathy</p>
-          <p class="hero-description" data-brand="brand-description"></p>
-          <div class="hero-buttons">
-            <a href="#" class="btn btn-whatsapp" data-whatsapp-link target="_blank"><i class="fab fa-whatsapp"></i> Book on WhatsApp</a>
-            <a href="services.html" class="btn btn-secondary">View Our Services</a>
-          </div>
+      <div class="hero-center">
+        <span class="hero-badge" data-brand="brand-positioning"></span>
+        <h1>Give Your Neck to an Expert</h1>
+        <p class="tagline">A Mix of Asian Alternative Therapy, Canadian Physio Protocols, Rehab Programs, and Bone Osteopathy</p>
+        <p class="hero-description" data-brand="brand-description"></p>
+        <div class="hero-buttons">
+          <a href="#" class="btn btn-whatsapp" data-whatsapp-link target="_blank"><i class="fab fa-whatsapp"></i> Book on WhatsApp</a>
+          <a href="services.html" class="btn btn-secondary">View Our Services</a>
         </div>
-        <div class="video-showcase">
-          <div class="glow-stage" aria-hidden="true">
-            <div class="glow-orb o1"></div>
-            <div class="glow-orb o2"></div>
-            <div class="glow-orb o3"></div>
-            <div class="glow-ring r1"></div>
-            <div class="glow-ring r2"></div>
-            <div class="glow-core"></div>
-          </div>
-          <div class="specialty-tags">
-            <span><span class="dot"></span>Glenohumeral Joint</span>
-            <span><span class="dot"></span>Rotator Cuff</span>
-            <span><span class="dot"></span>Cervical Spine</span>
-          </div>
+        <div class="specialty-tags">
+          <span><span class="dot"></span>Glenohumeral Joint</span>
+          <span><span class="dot"></span>Rotator Cuff</span>
+          <span><span class="dot"></span>Cervical Spine</span>
         </div>
+      </div>
+      <div class="scroll-cue" aria-hidden="true"><span class="scroll-cue-line"></span>Scroll to see real recovery in motion</div>
+    </div>
+  </section>
+
+  <!-- ELBOW FLEXION SCROLL REVEAL — real footage, scrubbed by scroll position.
+       Pure CSS sticky handles the pin (works with zero JS); GSAP ScrollTrigger,
+       when available, ties video.currentTime + caption opacity to scroll progress
+       for the "scrolling to find it" reveal. Without JS the video still just
+       autoplays/loops muted, so the section always looks intentional. -->
+  <section class="elbow-reveal" id="elbowReveal">
+    <div class="elbow-reveal-stage">
+      <video class="elbow-video" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+        <source src="https://videos.pexels.com/video-files/30352917/13010402_1080_1920_50fps.mp4" type="video/mp4">
+      </video>
+      <div class="elbow-overlay"></div>
+      <div class="elbow-caption">
+        <span class="elbow-tag"><span class="dot"></span>Elbow Flexion &mdash; Biceps Brachii</span>
+        <h2>Real Recovery, In Motion</h2>
+        <p>Every protocol at Canadian Physio Center is built to restore full, pain-free range of motion &mdash; not just relieve symptoms.</p>
       </div>
     </div>
   </section>
