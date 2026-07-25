@@ -77,34 +77,7 @@ nav.scrolled {
   .hamburger { display: block; }
 }
 
-/* ── SIGNATURE MOTIF: ABSTRACT GLOW COMPOSITION ──
-   No photo, no video, no illustrated figure — three earlier attempts
-   at literal imagery all missed. This is pure abstract motion: soft
-   blurred gradient orbs drifting slowly + two thin rotating rings,
-   in the brand's gold/rose/teal palette. It reads as premium/tech
-   rather than trying (and risking failing) to depict a person or
-   joint. GSAP drives the drift/rotation — see js/motion.js. */
-.glow-stage {
-  position: relative; width: 100%; max-width: 440px; aspect-ratio: 1 / 1; margin: 0 auto;
-}
-.glow-orb {
-  position: absolute; border-radius: 50%; filter: blur(50px); opacity: .55;
-}
-.glow-orb.o1 { width: 260px; height: 260px; top: 6%;  left: 8%;  background: radial-gradient(circle, var(--gold-light), transparent 70%); }
-.glow-orb.o2 { width: 220px; height: 220px; bottom: 8%; right: 6%; background: radial-gradient(circle, var(--rose), transparent 70%); opacity: .4; }
-.glow-orb.o3 { width: 180px; height: 180px; top: 38%; left: 30%; background: radial-gradient(circle, var(--gold), transparent 70%); opacity: .35; }
-
-.glow-ring { position: absolute; border-radius: 50%; border: 1px solid rgba(245,207,119,.35); }
-.glow-ring.r1 { width: 78%; height: 78%; top: 11%; left: 11%; }
-.glow-ring.r2 { width: 56%; height: 56%; top: 22%; left: 22%; border-color: rgba(204,51,102,.3); }
-
-.glow-core {
-  position: absolute; top: 50%; left: 50%; width: 14px; height: 14px; border-radius: 50%;
-  background: var(--gold-light); transform: translate(-50%, -50%);
-  box-shadow: 0 0 24px 6px rgba(245,207,119,.6);
-}
-
-.specialty-tags { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 20px; }
+.specialty-tags { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 28px; }
 .specialty-tags span {
   display: inline-flex; align-items: center; gap: 6px;
   font-size: .68rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
@@ -113,14 +86,16 @@ nav.scrolled {
 }
 .specialty-tags .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--rose); }
 
-/* ── HERO — dark, minimal, one focal image, restrained chrome ── */
+/* ── HERO — dark, centered, text-first. The pay-off image lives just
+   below in .elbow-reveal, discovered by scrolling rather than crammed
+   next to the headline. ── */
 .hero {
   background: linear-gradient(180deg, #081f20 0%, var(--navy) 55%, #0a2b2c 100%);
-  position: relative; overflow: hidden;
+  position: relative; overflow: hidden; min-height: 92vh; display: flex; align-items: center;
 }
 .hero::before {
   content: ''; position: absolute; inset: 0; pointer-events: none;
-  background: radial-gradient(ellipse 60% 50% at 15% 10%, rgba(245,207,119,.10) 0%, transparent 60%);
+  background: radial-gradient(ellipse 70% 55% at 50% 8%, rgba(245,207,119,.12) 0%, transparent 60%);
 }
 .hero-badge {
   display: inline-block; padding: 8px 18px; border-radius: 30px;
@@ -128,10 +103,58 @@ nav.scrolled {
   color: var(--gold-light); font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
   margin-bottom: 26px;
 }
-.hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 56px; align-items: center; text-align: left; position: relative; z-index: 1; }
+.hero-center { max-width: 780px; margin: 0 auto; text-align: center; position: relative; z-index: 1; }
 .hero h1 { font-size: 4.1rem; font-weight: 800; letter-spacing: -.01em; line-height: 1.1; }
 .hero .tagline { font-weight: 500; letter-spacing: .01em; }
-@media (max-width: 992px) { .hero-grid { grid-template-columns: 1fr; text-align: center; } .specialty-tags { justify-content: center; } .hero h1 { font-size: 2.6rem; } }
+.hero .hero-buttons { justify-content: center; }
+@media (max-width: 992px) { .hero h1 { font-size: 2.6rem; } }
+
+/* Scroll cue beneath the hero content — quiet nudge toward the reveal below */
+.scroll-cue {
+  position: relative; z-index: 1; margin: 56px auto 0; width: fit-content;
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  font-size: .68rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+  color: rgba(245,207,119,.55);
+}
+.scroll-cue-line { width: 1px; height: 34px; background: linear-gradient(180deg, rgba(245,207,119,.7), transparent); animation: scrollCueDrop 1.8s ease-in-out infinite; }
+@keyframes scrollCueDrop { 0%, 100% { transform: scaleY(1); opacity: .5; } 50% { transform: scaleY(1.3); opacity: 1; } }
+
+/* ── ELBOW FLEXION SCROLL REVEAL ──
+   Real physiotherapy footage (not stock-gym, not illustrated). CSS
+   `position: sticky` pins the stage with zero JS dependency; when GSAP
+   ScrollTrigger is available, js/motion.js scrubs the video's
+   currentTime and the caption opacity to scroll progress across the
+   full height of this section for the "scroll to find it" reveal. */
+.elbow-reveal { position: relative; height: 260vh; background: #081f20; }
+.elbow-reveal-stage {
+  position: sticky; top: 0; height: 100vh; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+.elbow-video {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; object-position: 50% 40%;
+}
+.elbow-overlay {
+  position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(180deg, rgba(8,31,32,.55) 0%, rgba(8,31,32,.08) 30%, rgba(8,31,32,.15) 60%, rgba(8,31,32,.85) 100%);
+}
+.elbow-caption {
+  position: relative; z-index: 1; max-width: 620px; margin: 0 auto; padding: 0 24px;
+  text-align: center; color: #fff;
+}
+.elbow-caption h2 { font-size: 2.4rem; font-weight: 800; color: #fff; margin: 14px 0 12px; }
+.elbow-caption p { color: rgba(255,255,255,.8); font-size: 1.02rem; line-height: 1.7; }
+.elbow-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: .7rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--gold-light); background: rgba(245,207,119,.1); border: 1px solid rgba(245,207,119,.3);
+  padding: 8px 16px; border-radius: 20px;
+}
+.elbow-tag .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--rose); }
+@media (max-width: 768px) {
+  .elbow-reveal { height: 200vh; }
+  .elbow-caption h2 { font-size: 1.7rem; }
+}
 
 /* ── TRUST / ACCREDITATION BAR ── */
 .accred-bar { background: var(--white); padding: 36px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
