@@ -1,0 +1,178 @@
+/* ============================================================
+   CANADIAN PHYSIO CENTER — BRAND OVERRIDES & NEW COMPONENTS
+   Loads AFTER style.css / animations.css / responsive.css.
+   Palette: gold/champagne + deep teal + rose accent + cream base.
+   ============================================================ */
+
+:root {
+  --gold:        #B19B68;
+  --gold-dark:   #856F3B;
+  --gold-light:  #F5CF77;
+  --navy:        #0E3E40;   /* repurposed as deep teal */
+  --navy-mid:    #1C4142;
+  --rose:        #CC3366;
+  --white:       #FFFFFF;
+  --beige:       #FAF9F6;   /* cream */
+  --beige-mid:   #F2EFE8;
+  --beige-dark:  #E4DDCB;
+  --sand:        #F9FAFA;
+  --brown-text:  #333333;
+  --border:      #E4DDCB;
+}
+
+body { background: var(--beige); }
+
+/* ── FLOATING CRYSTAL NAV (extracted from kit inline <style>) ── */
+nav {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 48px);
+  max-width: 1200px;
+  background: rgba(250,249,246,0.7);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(177,155,104,0.3);
+  border-radius: 60px;
+  padding: 10px 24px;
+  z-index: 1000;
+  transition: all .4s ease;
+  box-shadow: 0 4px 24px rgba(177,155,104,0.12);
+}
+nav.scrolled {
+  background: rgba(250,249,246,0.97);
+  border-color: rgba(177,155,104,0.35);
+  box-shadow: 0 8px 32px rgba(177,155,104,0.18);
+  top: 12px;
+}
+.nav-container { display: flex; align-items: center; justify-content: space-between; }
+.nav-logo { display: flex; align-items: center; }
+.brand-logo-img { height: 42px; object-fit: contain; filter: drop-shadow(0 2px 4px rgba(0,0,0,.1)); }
+.nav-links { display: flex; gap: 4px; list-style: none; margin: 0; padding: 0; }
+.nav-links a {
+  color: var(--navy); text-decoration: none; font-size: 14px; font-weight: 500;
+  padding: 7px 16px; border-radius: 30px; transition: all .3s; font-family: 'Cairo', sans-serif;
+}
+.nav-links a:hover { background: rgba(177,155,104,0.15); color: var(--gold) !important; }
+.nav-actions { display: flex; gap: 8px; align-items: center; }
+.nav-book {
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  color: #fff; padding: 9px 22px; border-radius: 30px; text-decoration: none;
+  font-size: 13px; font-weight: 700; transition: all .3s; white-space: nowrap;
+  box-shadow: 0 4px 16px rgba(177,155,104,0.3);
+}
+.nav-book:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(177,155,104,0.45); }
+.hamburger { display: none; background: none; border: none; color: var(--navy); font-size: 1.4rem; }
+@media (max-width: 900px) {
+  nav { top: 10px; border-radius: 20px; padding: 10px 18px; width: calc(100% - 24px); }
+  .nav-links { display: none; }
+  .nav-links.open {
+    display: flex; flex-direction: column; position: absolute; top: 62px; right: 0; left: 0;
+    background: rgba(250,249,246,0.98); border-radius: 20px; padding: 16px 20px;
+    box-shadow: 0 8px 32px rgba(0,0,0,.12); border: 1px solid rgba(177,155,104,0.3); gap: 4px; z-index: 999;
+  }
+  .nav-links.open li a { color: var(--navy); padding: 12px 16px; display: block; border-radius: 10px; font-size: 15px; }
+  .nav-book { display: none; }
+  .hamburger { display: block; }
+}
+
+/* ── SIGNATURE MOTIF: ANIMATED ANATOMY / JOINT GRAPHIC ──
+   Used in the hero and on every service card. A simple looping
+   SVG joint diagram with a pulsing/glowing pain-zone dot tied to
+   the relevant body part (shoulder / spine / knee / elbow / ankle). */
+.joint-graphic { width: 100%; max-width: 340px; margin: 0 auto; }
+.joint-graphic svg { width: 100%; height: auto; display: block; }
+.joint-pain-zone {
+  animation: jointPulse 2.2s ease-in-out infinite;
+  transform-origin: center;
+}
+@keyframes jointPulse {
+  0%, 100% { opacity: .55; r: 10; filter: drop-shadow(0 0 0px var(--rose)); }
+  50%      { opacity: 1;   r: 15; filter: drop-shadow(0 0 12px var(--rose)); }
+}
+.joint-limb { stroke: var(--gold); stroke-width: 6; stroke-linecap: round; fill: none; }
+.joint-limb.limb-a { animation: limbSwingA 3.4s ease-in-out infinite; transform-origin: 100px 100px; }
+.joint-limb.limb-b { animation: limbSwingB 3.4s ease-in-out infinite; transform-origin: 100px 100px; }
+@keyframes limbSwingA { 0%,100% { transform: rotate(-6deg); } 50% { transform: rotate(10deg); } }
+@keyframes limbSwingB { 0%,100% { transform: rotate(6deg); }  50% { transform: rotate(-10deg); } }
+
+/* Small inline variant used on service cards */
+.service-joint-mini { width: 56px; height: 56px; opacity: .9; }
+.service-joint-mini .joint-pain-zone { animation-duration: 1.8s; }
+
+/* ── HERO (teal instead of flat navy/black, motion background) ── */
+.hero {
+  background: radial-gradient(circle at 30% 20%, var(--navy-mid) 0%, var(--navy) 65%);
+  position: relative;
+}
+.hero-badge {
+  display: inline-block; padding: 8px 20px; border-radius: 30px;
+  background: rgba(177,155,104,0.18); border: 1px solid rgba(245,207,119,0.4);
+  color: var(--gold-light); font-size: .8rem; font-weight: 700; letter-spacing: .5px;
+  margin-bottom: 22px;
+}
+.hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 40px; align-items: center; text-align: left; }
+@media (max-width: 992px) { .hero-grid { grid-template-columns: 1fr; text-align: center; } }
+
+/* ── TRUST / ACCREDITATION BAR ── */
+.accred-bar { background: var(--white); padding: 36px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.accred-track { display: flex; align-items: center; justify-content: center; gap: 48px; flex-wrap: wrap; }
+.accred-track img { height: 46px; width: auto; object-fit: contain; filter: grayscale(35%); opacity: .85; transition: .3s; }
+.accred-track img:hover { filter: grayscale(0%); opacity: 1; transform: translateY(-2px); }
+
+/* ── SERVICE CARDS with joint graphic + hover motion ── */
+.service-card { position: relative; overflow: hidden; }
+.service-card:hover .service-joint-mini .joint-pain-zone { animation-duration: .9s; }
+.service-card-img { height: 160px; border-radius: 12px; overflow: hidden; margin-bottom: 16px; }
+.service-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
+.service-card:hover .service-card-img img { transform: scale(1.06); }
+
+/* ── DOCTOR / TEAM CARDS ── */
+.team-card-img { height: 280px; overflow: hidden; border-radius: 16px 16px 0 0; margin: -1px -1px 0 -1px; }
+.team-card-img img { width: 100%; height: 100%; object-fit: cover; object-position: top; transition: transform .5s; }
+.team-card:hover .team-card-img img { transform: scale(1.05); }
+.team-credentials { text-align: left; font-size: .8rem; color: var(--brown-text); line-height: 1.7; margin-top: 10px; }
+
+/* ── DUAL BRANCH CARDS ── */
+.branch-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+@media (max-width: 768px) { .branch-grid { grid-template-columns: 1fr; } }
+.branch-card { background: var(--white); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; transition: .3s; }
+.branch-card:hover { border-color: var(--gold); box-shadow: 0 8px 24px rgba(177,155,104,.15); transform: translateY(-4px); }
+.branch-map { height: 240px; width: 100%; border: 0; display: block; }
+.branch-body { padding: 24px; }
+.branch-body h3 { color: var(--navy); margin-bottom: 8px; }
+.branch-body p { color: var(--brown-text); font-size: .9rem; line-height: 1.7; margin-bottom: 14px; }
+
+/* ── VIDEO GALLERY ── */
+.video-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+.video-embed { position: relative; padding-top: 56.25%; border-radius: 16px; overflow: hidden; background: var(--navy); }
+.video-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+/* ── STICKY BOOKING CTA ── */
+.sticky-book-bar {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 998;
+  background: var(--navy); color: #fff; padding: 12px 20px;
+  display: flex; align-items: center; justify-content: center; gap: 16px;
+  box-shadow: 0 -4px 20px rgba(0,0,0,.15);
+  transform: translateY(100%); transition: transform .4s ease;
+}
+.sticky-book-bar.show { transform: translateY(0); }
+.sticky-book-bar span { font-size: .9rem; font-weight: 600; }
+.sticky-book-bar .btn { padding: 10px 22px; font-size: .85rem; }
+@media (max-width: 600px) { .sticky-book-bar span { display: none; } }
+
+/* Rose accent badges (small highlight moments) */
+.badge-rose { background: rgba(204,51,102,.1); color: var(--rose); border: 1px solid rgba(204,51,102,.3); padding: 4px 12px; border-radius: 20px; font-size: .75rem; font-weight: 700; }
+
+/* ── Small layout utilities used across pages (no inline style=) ── */
+.section-cta { text-align: center; margin-top: 40px; }
+.footer-logo-link { display: inline-block; margin-bottom: 14px; }
+.footer-hours { margin-top: 10px; }
+.btn-sm { padding: 8px 16px; font-size: .8rem; }
+
+/* Service card "Learn More" needs to read on the light sand card
+   background, so it can't reuse .btn-secondary (that variant is
+   white-on-transparent, built for the dark hero only). */
+.btn-service { background: transparent; color: var(--gold); border: 2px solid var(--gold); margin-top: 4px; }
+.btn-service:hover { background: var(--gold); color: #fff; transform: translateY(-2px); }
