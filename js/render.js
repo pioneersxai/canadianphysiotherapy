@@ -39,10 +39,13 @@
   }
 
   function jointSvg() {
+    // Small version of the hero's articulated arm: upper arm rotates at the
+    // shoulder (50,30), forearm rotates independently at the elbow (66,52) —
+    // same two real pivot points, just scaled down for the service card.
     return '<svg viewBox="0 0 100 100" class="service-joint-mini" aria-hidden="true">' +
-      '<path class="joint-limb limb-a" d="M50,50 L30,25" stroke-width="4"/>' +
-      '<path class="joint-limb limb-b" d="M50,50 L70,75" stroke-width="4"/>' +
-      '<circle class="joint-pain-zone" cx="50" cy="50" r="6" fill="#CC3366"/>' +
+      '<path class="anatomy-upper-arm" d="M50,30 L66,52" />' +
+      '<path class="anatomy-forearm" d="M66,52 L52,74" />' +
+      '<circle class="anatomy-joint" cx="50" cy="30" r="6" />' +
     '</svg>';
   }
 
