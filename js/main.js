@@ -1,6 +1,10 @@
 /**
  * ===================================
- * PIONEERSX - MAIN JAVASCRIPT
+ * CANADIAN PHYSIO CENTER — MAIN JAVASCRIPT
+ * Contact/booking form → WhatsApp handoff, stat counters, notifications,
+ * footer year, lazy image loading. Navbar scroll/hamburger/loader/smooth
+ * scroll now live in js/nav.js — kept separate so this file only owns
+ * page behavior, not chrome that's identical on every page.
  * ===================================
  */
 
@@ -8,194 +12,82 @@
 
 /**
  * ===================================
- * PAGE LOADER
- * ===================================
- */
-window.addEventListener('load', () => {
-    const loader = document.getElementById('loader');
-    setTimeout(() => {
-        loader.classList.add('hidden');
-    }, 1000);
-});
-
-/**
- * ===================================
- * NAVBAR SCROLL EFFECT
- * ===================================
- */
-const navbar = document.getElementById('navbar');
-const scrollTop = document.getElementById('scrollTop');
-
-window.addEventListener('scroll', () => {
-    // Navbar background on scroll
-    if (window.scrollY > 50) {
-        navbar.classList.add('scrolled');
-    } else {
-        navbar.classList.remove('scrolled');
-    }
-
-    // Scroll to top button visibility
-    if (window.scrollY > 300) {
-        scrollTop.classList.add('visible');
-    } else {
-        scrollTop.classList.remove('visible');
-    }
-});
-
-/**
- * ===================================
- * MOBILE MENU TOGGLE
- * ===================================
- */
-const mobileMenu = document.getElementById('mobileMenu');
-const navLinks = document.getElementById('navLinks');
-
-mobileMenu.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-    
-    // Toggle icon
-    const icon = mobileMenu.querySelector('i');
-    if (navLinks.classList.contains('active')) {
-        icon.classList.remove('fa-bars');
-        icon.classList.add('fa-times');
-    } else {
-        icon.classList.remove('fa-times');
-        icon.classList.add('fa-bars');
-    }
-});
-
-// Close mobile menu when clicking on a link
-navLinks.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-        navLinks.classList.remove('active');
-        const icon = mobileMenu.querySelector('i');
-        icon.classList.remove('fa-times');
-        icon.classList.add('fa-bars');
-    });
-});
-
-/**
- * ===================================
- * SMOOTH SCROLLING
- * ===================================
- */
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        
-        if (target) {
-            const headerOffset = 80;
-            const elementPosition = target.getBoundingClientRect().top;
-            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-            window.scrollTo({
-                top: offsetPosition,
-                behavior: 'smooth'
-            });
-        }
-    });
-});
-
-/**
- * ===================================
- * SCROLL TO TOP BUTTON
- * ===================================
- */
-scrollTop.addEventListener('click', () => {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    });
-});
-
-/**
- * ===================================
- * CONTACT FORM SUBMISSION
+ * BOOKING / CONTACT FORM → WHATSAPP
+ * Only runs on pages that actually have #contactForm (contact.html) —
+ * guarded so pages without a form (index.html, service pages) don't error.
  * ===================================
  */
 const contactForm = document.getElementById('contactForm');
 
-contactForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    
-    // Get form data
-    const formData = new FormData(contactForm);
-    const data = Object.fromEntries(formData);
-    
-    // Validate form
-    if (!validateForm(data)) {
-        return;
-    }
-    
-    // Create WhatsApp message
-    const message = createWhatsAppMessage(data);
-    const waNumber = (typeof BRAND !== 'undefined') ? BRAND.whatsapp : '9665477705498';
-    const whatsappUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`;
-    
-    // Open WhatsApp
-    window.open(whatsappUrl, '_blank');
-    
-    // Show success message
-    showNotification('success', 'شكراً لتواصلك معنا! سيتم فتح واتساب لإكمال المحادثة.');
-    
-    // Reset form
-    contactForm.reset();
-});
+if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(contactForm);
+        const data = Object.fromEntries(formData);
+
+        if (!validateForm(data)) return;
+
+        const message = createWhatsAppMessage(data);
+        const branch = (typeof BRAND !== 'undefined' && BRAND.locations)
+            ? (BRAND.locations.find(l => l.id === data.branch) || BRAND.locations[0])
+            : null;
+        const waNumber = branch ? branch.whatsapp : ((typeof BRAND !== 'undefined') ? BRAND.whatsapp : '201113372169');
+        const whatsappUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`;
+
+        window.open(whatsappUrl, '_blank');
+        showNotification('success', 'Thanks — WhatsApp is opening so we can confirm your appointment.');
+        contactForm.reset();
+    });
+}
 
 /**
- * Validate form data
+ * Validate booking form data
  */
 function validateForm(data) {
-    // Check required fields
-    if (!data.name || !data.email || !data.phone || !data.message) {
-        showNotification('error', 'الرجاء ملء جميع الحقول المطلوبة');
+    if (!data.name || !data.phone || !data.message) {
+        showNotification('error', 'Please fill in your name, phone number, and message.');
         return false;
     }
-    
-    // Validate email
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(data.email)) {
-        showNotification('error', 'الرجاء إدخال بريد إلكتروني صحيح');
-        return false;
-    }
-    
-    // Validate phone
+
     const phoneRegex = /^[0-9+\-\s()]+$/;
     if (!phoneRegex.test(data.phone)) {
-        showNotification('error', 'الرجاء إدخال رقم هاتف صحيح');
+        showNotification('error', 'Please enter a valid phone number.');
         return false;
     }
-    
+
     return true;
 }
 
 /**
- * Create WhatsApp message from form data
+ * Build the WhatsApp message from booking form data
  */
 function createWhatsAppMessage(data) {
-    return `مرحباً، أريد التواصل معكم:
+    return `Hello, I'd like to book an appointment:
 
-الاسم: ${data.name}
-البريد الإلكتروني: ${data.email}
-الهاتف: ${data.phone}
-الشركة: ${data.company || 'غير محدد'}
-الخدمة المطلوبة: ${getServiceName(data.service)}
-الرسالة: ${data.message}`;
+Name: ${data.name}
+Phone: ${data.phone}
+Branch: ${getBranchName(data.branch)}
+Service: ${getServiceName(data.service)}
+Message: ${data.message}`;
 }
 
 /**
- * Get service name in Arabic
+ * Resolve a branch id to its display name via BRAND.locations
  */
-function getServiceName(value) {
-    const services = {
-        'medical': 'حلول طبية ذكية',
-        'automation': 'أتمتة العمليات',
-        'consultation': 'استشارات ذكاء اصطناعي',
-        'development': 'تطوير تطبيقات',
-        'other': 'أخرى'
-    };
-    return services[value] || 'غير محدد';
+function getBranchName(id) {
+    if (typeof BRAND === 'undefined' || !BRAND.locations) return id || 'Not specified';
+    const branch = BRAND.locations.find(l => l.id === id);
+    return branch ? branch.name : (id || 'Not specified');
+}
+
+/**
+ * Resolve a service id to its display name via BRAND.services
+ */
+function getServiceName(id) {
+    if (typeof BRAND === 'undefined' || !BRAND.services) return id || 'Not specified';
+    const service = BRAND.services.find(s => s.id === id);
+    return service ? service.name : (id || 'Not specified');
 }
 
 /**
@@ -204,13 +96,9 @@ function getServiceName(value) {
  * ===================================
  */
 function showNotification(type, message) {
-    // Remove existing notifications
     const existingNotification = document.querySelector('.notification');
-    if (existingNotification) {
-        existingNotification.remove();
-    }
-    
-    // Create notification element
+    if (existingNotification) existingNotification.remove();
+
     const notification = document.createElement('div');
     notification.className = `notification notification-${type}`;
     notification.innerHTML = `
@@ -219,31 +107,11 @@ function showNotification(type, message) {
             <span>${message}</span>
         </div>
     `;
-    
-    // Add styles
-    notification.style.cssText = `
-        position: fixed;
-        top: 100px;
-        right: 20px;
-        background: ${type === 'success' ? '#10b981' : '#ef4444'};
-        color: white;
-        padding: 15px 25px;
-        border-radius: 8px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        z-index: 10000;
-        animation: slideInRight 0.3s ease;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        max-width: 400px;
-    `;
-    
-    // Add to DOM
+
     document.body.appendChild(notification);
-    
-    // Auto remove after 5 seconds
+
     setTimeout(() => {
-        notification.style.animation = 'slideOutRight 0.3s ease';
+        notification.classList.add('notification-hide');
         setTimeout(() => notification.remove(), 300);
     }, 5000);
 }
@@ -251,39 +119,36 @@ function showNotification(type, message) {
 /**
  * ===================================
  * COUNTER ANIMATION FOR STATS
+ * Triggered by animations.js's IntersectionObserver when .stats
+ * scrolls into view (see js/animations.js).
  * ===================================
  */
 function animateCounters() {
     const counters = document.querySelectorAll('.stat-number');
-    
+
     counters.forEach(counter => {
         const target = counter.textContent;
         const isPercentage = target.includes('%');
         const isPlus = target.includes('+');
         const is247 = target.includes('/');
-        
-        // Extract numeric value
+
         const numericTarget = parseInt(target.replace(/[^\d]/g, ''));
-        
         if (isNaN(numericTarget)) return;
-        
+
         let current = 0;
         const increment = numericTarget / 50;
-        const duration = 2000; // 2 seconds
+        const duration = 2000;
         const stepTime = duration / 50;
-        
+
         const timer = setInterval(() => {
             current += increment;
-            
             if (current >= numericTarget) {
                 counter.textContent = target;
                 clearInterval(timer);
+            } else if (is247) {
+                counter.textContent = '24/7';
             } else {
-                if (is247) {
-                    counter.textContent = '24/7';
-                } else {
-                    counter.textContent = Math.floor(current) + (isPercentage ? '%' : isPlus ? '+' : '');
-                }
+                counter.textContent = Math.floor(current) + (isPercentage ? '%' : isPlus ? '+' : '');
             }
         }, stepTime);
     });
@@ -294,32 +159,15 @@ function animateCounters() {
  * DYNAMIC YEAR IN FOOTER
  * ===================================
  */
-const footerYear = document.querySelector('.footer-bottom p');
-if (footerYear) {
+const footerYearEl = document.querySelector('.footer-bottom p');
+if (footerYearEl) {
     const currentYear = new Date().getFullYear();
-    const brandName = (typeof BRAND !== 'undefined') ? BRAND.name : 'PioneersX';
-    footerYear.textContent = `© ${currentYear} ${brandName}. جميع الحقوق محفوظة.`;
+    footerYearEl.innerHTML = footerYearEl.innerHTML.replace(/©\s*\d{4}/, `© ${currentYear}`);
 }
 
 /**
  * ===================================
- * DETECT USER COUNTRY FOR LOCALIZATION
- * ===================================
- */
-async function detectUserCountry() {
-    try {
-        const response = await fetch('https://ipapi.co/json/');
-        const data = await response.json();
-        return data.country_code;
-    } catch (error) {
-        console.log('Could not detect country:', error);
-        return 'SA'; // Default to Saudi Arabia
-    }
-}
-
-/**
- * ===================================
- * LAZY LOADING IMAGES
+ * LAZY LOADING IMAGES (img[data-src])
  * ===================================
  */
 if ('IntersectionObserver' in window) {
@@ -333,54 +181,16 @@ if ('IntersectionObserver' in window) {
             }
         });
     });
-    
-    document.querySelectorAll('img[data-src]').forEach(img => {
-        imageObserver.observe(img);
-    });
+
+    document.querySelectorAll('img[data-src]').forEach(img => imageObserver.observe(img));
 }
 
 /**
  * ===================================
- * PERFORMANCE MONITORING
+ * EXPORT FUNCTIONS FOR USE IN OTHER SCRIPTS
  * ===================================
  */
-if ('PerformanceObserver' in window) {
-    // Monitor Largest Contentful Paint
-    const lcpObserver = new PerformanceObserver((list) => {
-        const entries = list.getEntries();
-        const lastEntry = entries[entries.length - 1];
-        console.log('LCP:', lastEntry.renderTime || lastEntry.loadTime);
-    });
-    
-    lcpObserver.observe({ entryTypes: ['largest-contentful-paint'] });
-    
-    // Monitor First Input Delay
-    const fidObserver = new PerformanceObserver((list) => {
-        const entries = list.getEntries();
-        entries.forEach(entry => {
-            console.log('FID:', entry.processingStart - entry.startTime);
-        });
-    });
-    
-    fidObserver.observe({ entryTypes: ['first-input'] });
-}
-
-/**
- * ===================================
- * CONSOLE MESSAGE
- * ===================================
- */
-console.log('%c🚀 PioneerX', 'color: #ff1e1e; font-size: 24px; font-weight: bold;');
-console.log('%cDeveloped with ❤️ by PioneerX Team', 'color: #b0b0b0; font-size: 14px;');
-console.log('%c👨‍💻 Interested in working with us? Visit: ' + ((typeof BRAND !== 'undefined') ? BRAND.domain : 'https://pioneersx.store'), 'color: #2563eb; font-size: 12px;');
-
-/**
- * ===================================
- * EXPORT FUNCTIONS FOR USE IN OTHER MODULES
- * ===================================
- */
-window.PioneerX = {
+window.CanadianPhysio = {
     showNotification,
-    detectUserCountry,
     animateCounters
 };
