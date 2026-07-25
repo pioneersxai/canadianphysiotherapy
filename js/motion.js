@@ -25,7 +25,7 @@
     // ── Hero entrance — runs immediately, no scroll needed ──
     var heroTargets = [
       '.hero-badge', '.hero h1', '.hero .tagline',
-      '.hero-description', '.hero-buttons', '.video-showcase'
+      '.hero-description', '.hero-buttons', '.specialty-tags', '.scroll-cue'
     ];
     var existing = heroTargets.filter(function (sel) { return document.querySelector(sel); });
     if (existing.length) {
@@ -49,28 +49,50 @@
       });
     }
 
-    // ── Abstract hero glow: slow orb drift + counter-rotating rings ──
-    // Each orb gets its own gentle, non-repeating-looking drift path
-    // (different duration/direction per orb avoids a robotic synced feel).
-    var orbs = document.querySelectorAll('.glow-orb');
-    var drift = [
-      { x: 18, y: -14, duration: 7 },
-      { x: -16, y: 12, duration: 9 },
-      { x: 12, y: 16, duration: 6 }
-    ];
-    orbs.forEach(function (orb, i) {
-      var d = drift[i % drift.length];
-      gsap.to(orb, {
-        x: d.x, y: d.y, duration: d.duration, ease: 'sine.inOut',
-        yoyo: true, repeat: -1
-      });
-    });
-    var r1 = document.querySelector('.glow-ring.r1');
-    var r2 = document.querySelector('.glow-ring.r2');
-    if (r1) gsap.to(r1, { rotation: 360, duration: 40, ease: 'none', repeat: -1, transformOrigin: '50% 50%' });
-    if (r2) gsap.to(r2, { rotation: -360, duration: 28, ease: 'none', repeat: -1, transformOrigin: '50% 50%' });
-    var core = document.querySelector('.glow-core');
-    if (core) gsap.to(core, { scale: 1.4, opacity: .6, duration: 1.8, ease: 'sine.inOut', yoyo: true, repeat: -1, transformOrigin: '50% 50%' });
+    // ── Elbow flexion scroll-scrub reveal ──
+    // CSS `position: sticky` on .elbow-reveal-stage already pins the visual
+    // with zero JS, and the <video> has autoplay/muted/loop as a baseline —
+    // so if anything below fails (slow network, video never reaches
+    // 'loadedmetadata', ScrollTrigger missing) the section still looks
+    // intentional. This block only *upgrades* it: pauses the natural loop
+    // and drives video.currentTime + caption opacity directly off scroll
+    // progress, which is what makes scrolling visually "find" the motion.
+    var elbowSection = document.querySelector('.elbow-reveal');
+    var elbowVideo = document.querySelector('.elbow-video');
+    var elbowCaption = document.querySelector('.elbow-caption');
+    if (elbowSection && elbowVideo && window.ScrollTrigger) {
+      if (elbowCaption) gsap.set(elbowCaption, { opacity: 0, y: 20 });
+
+      var wireScrub = function () {
+        if (!isFinite(elbowVideo.duration) || elbowVideo.duration <= 0) return;
+        elbowVideo.pause();
+        elbowVideo.removeAttribute('autoplay');
+        elbowVideo.loop = false;
+
+        ScrollTrigger.create({
+          trigger: elbowSection,
+          start: 'top top',
+          end: 'bottom bottom',
+          scrub: 0.6,
+          onUpdate: function (self) {
+            var t = self.progress * elbowVideo.duration;
+            if (isFinite(t)) {
+              try { elbowVideo.currentTime = t; } catch (e) { /* some browsers throttle seeks — safe to ignore */ }
+            }
+            if (elbowCaption) {
+              var p = Math.min(1, Math.max(0, (self.progress - 0.28) / 0.4));
+              gsap.set(elbowCaption, { opacity: p, y: 20 - 20 * p });
+            }
+          }
+        });
+      };
+
+      if (elbowVideo.readyState >= 1) {
+        wireScrub();
+      } else {
+        elbowVideo.addEventListener('loadedmetadata', wireScrub, { once: true });
+      }
+    }
 
     // ── Nicer hover lift on cards (spring-like, not linear) ──
     document.querySelectorAll('.service-card, .team-card, .medical-card, .branch-card, .testimonial').forEach(function (card) {
