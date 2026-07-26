@@ -22,15 +22,11 @@
 
     var EASE = 'power3.out';
 
-    // ── Hero entrance — runs immediately, no scroll needed ──
-    var heroTargets = [
-      '.hero-badge', '.hero h1', '.hero .tagline',
-      '.hero-description', '.hero-buttons', '.specialty-tags', '.scroll-cue'
-    ];
-    var existing = heroTargets.filter(function (sel) { return document.querySelector(sel); });
-    if (existing.length) {
-      gsap.set(existing, { opacity: 0, y: 16 });
-      gsap.to(existing, {
+    // ── Scene-one entrance — runs immediately, no scroll needed ──
+    var sceneZeroTargets = document.querySelectorAll('.story-scene[data-scene="0"] > *');
+    if (sceneZeroTargets.length) {
+      gsap.set(sceneZeroTargets, { opacity: 0, y: 16 });
+      gsap.to(sceneZeroTargets, {
         opacity: 1, y: 0, duration: 0.5, ease: EASE, stagger: 0.06, delay: 0.05
       });
     }
@@ -39,8 +35,8 @@
     var revealEls = document.querySelectorAll('.fade-in');
     if (revealEls.length && window.ScrollTrigger) {
       revealEls.forEach(function (el) {
-        // Hero elements already handled above — skip to avoid double-animating.
-        if (el.closest('.hero')) return;
+        // Story scenes have their own crossfade below — skip to avoid double-animating.
+        if (el.closest('.story')) return;
         gsap.set(el, { opacity: 0, y: 16 });
         gsap.to(el, {
           opacity: 1, y: 0, duration: 0.45, ease: EASE,
@@ -49,48 +45,68 @@
       });
     }
 
-    // ── Elbow flexion scroll-scrub reveal ──
-    // CSS `position: sticky` on .elbow-reveal-stage already pins the visual
-    // with zero JS, and the <video> has autoplay/muted/loop as a baseline —
-    // so if anything below fails (slow network, video never reaches
-    // 'loadedmetadata', ScrollTrigger missing) the section still looks
-    // intentional. This block only *upgrades* it: pauses the natural loop
-    // and drives video.currentTime + caption opacity directly off scroll
-    // progress, which is what makes scrolling visually "find" the motion.
-    var elbowSection = document.querySelector('.elbow-reveal');
-    var elbowVideo = document.querySelector('.elbow-video');
-    var elbowCaption = document.querySelector('.elbow-caption');
-    if (elbowSection && elbowVideo && window.ScrollTrigger) {
-      if (elbowCaption) gsap.set(elbowCaption, { opacity: 0, y: 20 });
+    // ── Cinematic scroll story: video scrub + scene crossfade + progress rail ──
+    // CSS `position: sticky` on .story-stage already pins the visual with zero
+    // JS, scene 0 is `.is-active` by default in the markup, and the <video>
+    // has autoplay/muted/loop as a baseline — so if anything below fails
+    // (slow network, video never reaching 'loadedmetadata', ScrollTrigger
+    // missing) the section still reads as a complete, intentional hero. This
+    // block only *upgrades* it: pauses the natural loop and drives
+    // video.currentTime, which of the four captions is visible, the progress
+    // rail, and a slow Ken-Burns zoom, all directly off scroll position.
+    var storySection = document.querySelector('.story');
+    var storyVideo = document.querySelector('.story-video');
+    var storyScenes = document.querySelectorAll('.story-scene');
+    var storyDots = document.querySelectorAll('.story-progress-dot');
+    var storyLabel = document.getElementById('storyProgressLabel');
+    var storyHint = document.getElementById('storyScrollHint');
+    var SCENE_NAMES = ['Home', 'Why Us', 'Specialties', 'Get Started'];
+
+    if (storyHint) {
+      storyHint.addEventListener('click', function () {
+        window.scrollTo({ top: window.scrollY + window.innerHeight * 0.9, behavior: 'smooth' });
+      });
+    }
+
+    if (storySection && storyVideo && window.ScrollTrigger) {
+      var setActiveScene = function (idx) {
+        storyScenes.forEach(function (scene) {
+          scene.classList.toggle('is-active', Number(scene.dataset.scene) === idx);
+        });
+        storyDots.forEach(function (dot) {
+          dot.classList.toggle('is-active', Number(dot.dataset.dot) === idx);
+        });
+        if (storyLabel) storyLabel.textContent = SCENE_NAMES[idx] || '';
+      };
 
       var wireScrub = function () {
-        if (!isFinite(elbowVideo.duration) || elbowVideo.duration <= 0) return;
-        elbowVideo.pause();
-        elbowVideo.removeAttribute('autoplay');
-        elbowVideo.loop = false;
+        if (!isFinite(storyVideo.duration) || storyVideo.duration <= 0) return;
+        storyVideo.pause();
+        storyVideo.removeAttribute('autoplay');
+        storyVideo.loop = false;
 
         ScrollTrigger.create({
-          trigger: elbowSection,
+          trigger: storySection,
           start: 'top top',
           end: 'bottom bottom',
           scrub: 0.6,
           onUpdate: function (self) {
-            var t = self.progress * elbowVideo.duration;
+            var p = self.progress;
+            var t = p * storyVideo.duration;
             if (isFinite(t)) {
-              try { elbowVideo.currentTime = t; } catch (e) { /* some browsers throttle seeks — safe to ignore */ }
+              try { storyVideo.currentTime = t; } catch (e) { /* some browsers throttle seeks — safe to ignore */ }
             }
-            if (elbowCaption) {
-              var p = Math.min(1, Math.max(0, (self.progress - 0.28) / 0.4));
-              gsap.set(elbowCaption, { opacity: p, y: 20 - 20 * p });
-            }
+            gsap.set(storyVideo, { scale: 1.06 + p * 0.12 });
+            setActiveScene(Math.min(3, Math.floor(p * 4)));
+            if (storyHint) gsap.set(storyHint, { opacity: p > 0.03 ? 0 : 1, pointerEvents: p > 0.03 ? 'none' : 'auto' });
           }
         });
       };
 
-      if (elbowVideo.readyState >= 1) {
+      if (storyVideo.readyState >= 1) {
         wireScrub();
       } else {
-        elbowVideo.addEventListener('loadedmetadata', wireScrub, { once: true });
+        storyVideo.addEventListener('loadedmetadata', wireScrub, { once: true });
       }
     }
 
