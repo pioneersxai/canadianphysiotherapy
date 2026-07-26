@@ -20,6 +20,42 @@
       gsap.registerPlugin(ScrollTrigger);
     }
 
+    // ── Lenis smooth scroll ──
+    // Native scroll is snappy/jumpy; Lenis eases every wheel/touch delta so
+    // the whole page (not just the pinned story) feels weighted instead of
+    // jerky — the single biggest "feel" gap next to a site like mont-fort.com.
+    // It updates the real window scroll position (not a virtual one), so
+    // nothing else in this file has to know it's there. Guarded: if the CDN
+    // fails, the browser just falls back to normal native scroll.
+    if (typeof Lenis !== 'undefined') {
+      try {
+        var lenis = new Lenis({ smoothWheel: true, lerp: 0.1 });
+        if (window.ScrollTrigger) lenis.on('scroll', ScrollTrigger.update);
+        gsap.ticker.add(function (time) { lenis.raf(time * 1000); });
+        gsap.ticker.lagSmoothing(0);
+      } catch (e) { /* smooth scroll is an enhancement, never a requirement */ }
+    }
+
+    // ── Vanta (three.js/WebGL) fog — the "world" behind the story chapters ──
+    // Brand-recolored ambient atmosphere, same family of technique
+    // mont-fort.com uses for its live 3D backdrop, without needing a custom
+    // shader or 3D assets. Wrapped in try/catch: WebGL can be unavailable or
+    // context-lost on some devices, and .story-tint's gradient alone still
+    // reads as a complete, intentional dark hero if this never runs.
+    var webglEl = document.getElementById('storyWebgl');
+    if (webglEl && window.VANTA && window.VANTA.FOG) {
+      try {
+        window.VANTA.FOG({
+          el: webglEl,
+          mouseControls: false, touchControls: false, gyroControls: false,
+          minHeight: 200, minWidth: 200,
+          highlightColor: 0xf5cf77, midtoneColor: 0x1c4142,
+          lowlightColor: 0x0e3e40, baseColor: 0x081f20,
+          blurFactor: 0.6, speed: 1.2, zoom: 1
+        });
+      } catch (e) { /* see comment above */ }
+    }
+
     var EASE = 'power3.out';
 
     // ── Scene-one entrance — runs immediately, no scroll needed ──
