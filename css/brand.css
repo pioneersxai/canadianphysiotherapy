@@ -102,20 +102,32 @@ nav.scrolled {
   position: sticky; top: 0; height: 100vh; overflow: hidden;
   display: flex; align-items: center; justify-content: center;
 }
+/* Live WebGL fog (Vanta/three.js, brand-recolored) — the ambient "world" the
+   old flat gradient could never be. Sits behind everything; if WebGL is
+   unsupported or blocked, js/motion.js never calls VANTA and .story-tint's
+   gradient alone still reads as a complete, intentional dark hero. */
+.story-webgl { position: absolute; inset: 0; z-index: 0; }
+/* The real elbow-flexion footage, reframed as a floating portrait panel
+   rather than a cropped full-bleed cover — the footage is natively 9:16,
+   so this is also just the honest shape of the source video. The fog shows
+   through around it, which is what actually reads as "atmosphere" instead
+   of "a video with a filter on it". */
 .story-video {
-  position: absolute; inset: 0; width: 100%; height: 100%;
-  object-fit: cover; object-position: 50% 40%;
-  filter: grayscale(65%) brightness(.72) contrast(1.08);
-  transform: scale(1.06);
+  position: absolute; top: 9%; bottom: 9%; left: 50%; z-index: 1;
+  width: auto; height: 82%; max-width: 480px;
+  transform: translateX(-50%);
+  border-radius: 28px; object-fit: cover;
+  box-shadow: 0 30px 80px rgba(0,0,0,.55), 0 0 0 1px rgba(245,207,119,.18);
+  filter: grayscale(55%) brightness(.78) contrast(1.08);
 }
 .story-tint {
-  position: absolute; inset: 0; pointer-events: none;
+  position: absolute; inset: 0; z-index: 2; pointer-events: none;
   background:
-    radial-gradient(ellipse 70% 55% at 50% 30%, rgba(245,207,119,.10) 0%, transparent 60%),
-    linear-gradient(180deg, rgba(8,31,32,.72) 0%, rgba(8,31,32,.32) 32%, rgba(8,31,32,.4) 68%, rgba(8,31,32,.85) 100%);
+    radial-gradient(ellipse 70% 55% at 50% 30%, rgba(245,207,119,.08) 0%, transparent 60%),
+    linear-gradient(180deg, rgba(8,31,32,.55) 0%, rgba(8,31,32,.05) 30%, rgba(8,31,32,.15) 65%, rgba(8,31,32,.8) 100%);
   mix-blend-mode: multiply;
 }
-.story-scenes { position: relative; z-index: 1; width: 100%; height: 100%; max-width: 640px; margin: 0 auto; padding: 0 24px; text-align: center; }
+.story-scenes { position: relative; z-index: 3; width: 100%; height: 100%; max-width: 640px; margin: 0 auto; padding: 0 24px; text-align: center; }
 .story-scene {
   position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
   opacity: 0; visibility: hidden; transition: opacity .3s linear; color: #fff;
@@ -158,6 +170,7 @@ nav.scrolled {
 }
 @media (max-width: 768px) {
   .story { height: 340vh; }
+  .story-video { height: 46%; max-width: 280px; top: auto; bottom: 4%; opacity: .55; }
   .story-scene h1 { font-size: 2.5rem; }
   .story-scene h2 { font-size: 1.9rem; }
   .story-progress { left: 16px; }
