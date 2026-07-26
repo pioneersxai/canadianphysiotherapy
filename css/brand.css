@@ -115,7 +115,7 @@ nav.scrolled {
     linear-gradient(180deg, rgba(8,31,32,.72) 0%, rgba(8,31,32,.32) 32%, rgba(8,31,32,.4) 68%, rgba(8,31,32,.85) 100%);
   mix-blend-mode: multiply;
 }
-.story-scenes { position: relative; z-index: 1; max-width: 640px; margin: 0 auto; padding: 0 24px; text-align: center; }
+.story-scenes { position: relative; z-index: 1; width: 100%; height: 100%; max-width: 640px; margin: 0 auto; padding: 0 24px; text-align: center; }
 .story-scene {
   position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
   opacity: 0; visibility: hidden; transition: opacity .3s linear; color: #fff;
