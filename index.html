@@ -11,6 +11,7 @@
   <link rel="icon" type="image/png" href="https://canadianphysiocenter.com/wp-content/uploads/2025/06/cropped-Logo-resized-2-270x270.png">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/lenis@1.3.25/dist/lenis.css">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/animations.css">
   <link rel="stylesheet" href="css/responsive.css">
@@ -52,6 +53,7 @@
        the video autoplaying/looping muted — never broken, just less alive. -->
   <section class="story" id="home">
     <div class="story-stage">
+      <div class="story-webgl" id="storyWebgl" aria-hidden="true"></div>
       <video class="story-video" autoplay muted loop playsinline preload="auto" aria-hidden="true">
         <source src="https://videos.pexels.com/video-files/30352917/13010402_1080_1920_50fps.mp4" type="video/mp4">
       </video>
@@ -241,8 +243,11 @@
     <a href="#" class="btn btn-whatsapp" data-whatsapp-link target="_blank"><i class="fab fa-whatsapp"></i> Book Now</a>
   </div>
 
+  <script src="https://unpkg.com/lenis@1.3.25/dist/lenis.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.24/vanta.fog.min.js"></script>
   <script src="config.js"></script>
   <script src="js/render.js"></script>
   <script src="js/main.js"></script>
