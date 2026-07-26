@@ -41,43 +41,65 @@
     </div>
   </nav>
 
-  <!-- HERO — centered, text-first entrance -->
-  <section class="hero" id="home">
-    <div class="container">
-      <div class="hero-center">
-        <span class="hero-badge" data-brand="brand-positioning"></span>
-        <h1>Give Your Neck to an Expert</h1>
-        <p class="tagline">A Mix of Asian Alternative Therapy, Canadian Physio Protocols, Rehab Programs, and Bone Osteopathy</p>
-        <p class="hero-description" data-brand="brand-description"></p>
-        <div class="hero-buttons">
-          <a href="#" class="btn btn-whatsapp" data-whatsapp-link target="_blank"><i class="fab fa-whatsapp"></i> Book on WhatsApp</a>
-          <a href="services.html" class="btn btn-secondary">View Our Services</a>
-        </div>
-        <div class="specialty-tags">
-          <span><span class="dot"></span>Glenohumeral Joint</span>
-          <span><span class="dot"></span>Rotator Cuff</span>
-          <span><span class="dot"></span>Cervical Spine</span>
-        </div>
-      </div>
-      <div class="scroll-cue" aria-hidden="true"><span class="scroll-cue-line"></span>Scroll to see real recovery in motion</div>
-    </div>
-  </section>
-
-  <!-- ELBOW FLEXION SCROLL REVEAL — real footage, scrubbed by scroll position.
-       Pure CSS sticky handles the pin (works with zero JS); GSAP ScrollTrigger,
-       when available, ties video.currentTime + caption opacity to scroll progress
-       for the "scrolling to find it" reveal. Without JS the video still just
-       autoplays/loops muted, so the section always looks intentional. -->
-  <section class="elbow-reveal" id="elbowReveal">
-    <div class="elbow-reveal-stage">
-      <video class="elbow-video" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+  <!-- CINEMATIC SCROLL STORY — one continuous pinned scene (real elbow-flexion
+       footage, desaturated to a quiet navy/gold grade) with four short caption
+       "chapters" that crossfade as you scroll, plus a left-side progress rail.
+       Modeled on the pinned-background + fading-caption pattern used by
+       mont-fort.com. Pure CSS sticky handles the pin with zero JS; GSAP
+       ScrollTrigger (js/motion.js), when available, scrubs video.currentTime,
+       crossfades the four scenes and updates the progress rail off scroll
+       position. Without JS, scene one just sits there as a normal hero with
+       the video autoplaying/looping muted — never broken, just less alive. -->
+  <section class="story" id="home">
+    <div class="story-stage">
+      <video class="story-video" autoplay muted loop playsinline preload="auto" aria-hidden="true">
         <source src="https://videos.pexels.com/video-files/30352917/13010402_1080_1920_50fps.mp4" type="video/mp4">
       </video>
-      <div class="elbow-overlay"></div>
-      <div class="elbow-caption">
-        <span class="elbow-tag"><span class="dot"></span>Elbow Flexion &mdash; Biceps Brachii</span>
-        <h2>Real Recovery, In Motion</h2>
-        <p>Every protocol at Canadian Physio Center is built to restore full, pain-free range of motion &mdash; not just relieve symptoms.</p>
+      <div class="story-tint" aria-hidden="true"></div>
+
+      <div class="story-scenes">
+        <div class="story-scene is-active" data-scene="0">
+          <span class="story-eyebrow" data-brand="brand-positioning"></span>
+          <h1>Give Your Neck to an Expert</h1>
+          <p>A Mix of Asian Alternative Therapy, Canadian Physio Protocols, Rehab Programs, and Bone Osteopathy</p>
+          <div class="hero-buttons">
+            <a href="#" class="btn btn-whatsapp" data-whatsapp-link target="_blank"><i class="fab fa-whatsapp"></i> Book on WhatsApp</a>
+            <a href="services.html" class="btn btn-secondary">View Our Services</a>
+          </div>
+        </div>
+        <div class="story-scene" data-scene="1">
+          <span class="story-eyebrow">Why Canadian Physio Center</span>
+          <h2>Diagnosis First. Always.</h2>
+          <p>Every patient gets a full physical assessment before any treatment protocol is designed — Canadian, European, and New Zealand accredited practitioners, not guesswork.</p>
+        </div>
+        <div class="story-scene" data-scene="2">
+          <span class="story-eyebrow">Our Focus</span>
+          <h2>East Meets West, Joint by Joint</h2>
+          <p>The first shoulder-specialized center in Egypt &amp; the Middle East — Canadian physio protocols combined with Asian alternative therapy and acupuncture.</p>
+          <div class="specialty-tags">
+            <span><span class="dot"></span>Glenohumeral Joint</span>
+            <span><span class="dot"></span>Rotator Cuff</span>
+            <span><span class="dot"></span>Cervical Spine</span>
+          </div>
+        </div>
+        <div class="story-scene" data-scene="3">
+          <span class="story-eyebrow">Two Branches, One Standard</span>
+          <h2>Ready For Your Diagnosis?</h2>
+          <p data-brand="brand-hours"></p>
+          <div class="hero-buttons">
+            <a href="#" class="btn btn-whatsapp" data-whatsapp-link target="_blank"><i class="fab fa-whatsapp"></i> Book on WhatsApp</a>
+          </div>
+        </div>
+      </div>
+
+      <button class="story-scroll-hint" id="storyScrollHint" aria-label="Scroll down" type="button"><i class="fas fa-chevron-down"></i></button>
+
+      <div class="story-progress" id="storyProgress" aria-hidden="true">
+        <span class="story-progress-dot is-active" data-dot="0"></span>
+        <span class="story-progress-dot" data-dot="1"></span>
+        <span class="story-progress-dot" data-dot="2"></span>
+        <span class="story-progress-dot" data-dot="3"></span>
+        <span class="story-progress-label" id="storyProgressLabel">Home</span>
       </div>
     </div>
   </section>
@@ -93,24 +115,6 @@
   <section class="stats section">
     <div class="container">
       <div class="stats-grid" id="statsGrid"><!-- populated by js/render.js from BRAND.stats --></div>
-    </div>
-  </section>
-
-  <!-- WHY US -->
-  <section class="features section" id="why-us">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title fade-in">Why Canadian Physio Center</h2>
-        <p class="section-subtitle fade-in">A diagnosis-first approach, built on internationally certified protocols</p>
-      </div>
-      <div class="medical-grid">
-        <div class="medical-card fade-in"><i class="fas fa-clipboard-check medical-icon"></i><h3 class="medical-title">Assessment First</h3><p class="medical-description">Every patient gets a full physical assessment before any treatment protocol is designed.</p></div>
-        <div class="medical-card fade-in"><i class="fas fa-award medical-icon"></i><h3 class="medical-title">Internationally Certified</h3><p class="medical-description">Canadian, European, and New Zealand accredited protocols and practitioners.</p></div>
-        <div class="medical-card fade-in"><i class="fas fa-hand-holding-heart medical-icon"></i><h3 class="medical-title">Shoulder Specialists</h3><p class="medical-description">The first shoulder-specialized center in Egypt & the Middle East.</p></div>
-        <div class="medical-card fade-in"><i class="fas fa-yin-yang medical-icon"></i><h3 class="medical-title">East Meets West</h3><p class="medical-description">Canadian physio protocols combined with Asian alternative therapy and acupuncture.</p></div>
-        <div class="medical-card fade-in"><i class="fas fa-map-marker-alt medical-icon"></i><h3 class="medical-title">Two Convenient Branches</h3><p class="medical-description">New Cairo (5th Settlement) and Sheikh Zayed — pick whichever is closer.</p></div>
-        <div class="medical-card fade-in"><i class="fas fa-comment-medical medical-icon"></i><h3 class="medical-title">Real Booking, No Guesswork</h3><p class="medical-description">Book directly on WhatsApp or through our online form — no more calling and hoping.</p></div>
-      </div>
     </div>
   </section>
 
