@@ -45,13 +45,17 @@
     var webglEl = document.getElementById('storyWebgl');
     if (webglEl && window.VANTA && window.VANTA.FOG) {
       try {
+        // Lower blurFactor/speed than the Vanta defaults on purpose: the
+        // higher settings we shipped first washed the gold highlight and
+        // navy midtone into an indistinct olive "swamp" — crisper wisps
+        // and slower drift read as quiet mist instead of murky water.
         window.VANTA.FOG({
           el: webglEl,
           mouseControls: false, touchControls: false, gyroControls: false,
           minHeight: 200, minWidth: 200,
-          highlightColor: 0xf5cf77, midtoneColor: 0x1c4142,
-          lowlightColor: 0x0e3e40, baseColor: 0x081f20,
-          blurFactor: 0.6, speed: 1.2, zoom: 1
+          highlightColor: 0xf5cf77, midtoneColor: 0x0e3e40,
+          lowlightColor: 0x081f20, baseColor: 0x061415,
+          blurFactor: 0.38, speed: 0.8, zoom: 1.3
         });
       } catch (e) { /* see comment above */ }
     }
