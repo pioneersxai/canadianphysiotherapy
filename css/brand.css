@@ -122,10 +122,10 @@ nav.scrolled {
 }
 .story-tint {
   position: absolute; inset: 0; z-index: 2; pointer-events: none;
-  background:
-    radial-gradient(ellipse 70% 55% at 50% 30%, rgba(245,207,119,.08) 0%, transparent 60%),
-    linear-gradient(180deg, rgba(8,31,32,.55) 0%, rgba(8,31,32,.05) 30%, rgba(8,31,32,.15) 65%, rgba(8,31,32,.8) 100%);
-  mix-blend-mode: multiply;
+  /* Plain alpha overlay, NOT multiply — multiply against an already-dark
+     WebGL scene crushes it into mud. This only needs to darken the top/
+     bottom edges for text legibility, not recolor the fog underneath it. */
+  background: linear-gradient(180deg, rgba(6,20,21,.6) 0%, transparent 26%, transparent 68%, rgba(6,20,21,.7) 100%);
 }
 .story-scenes { position: relative; z-index: 3; width: 100%; height: 100%; max-width: 640px; margin: 0 auto; padding: 0 24px; text-align: center; }
 .story-scene {
