@@ -62,7 +62,7 @@ nav.scrolled{background:rgba(8,31,32,.94);backdrop-filter:blur(14px);box-shadow:
 }
 
 /* ---------- HERO ---------- */
-.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:center;
+.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;
   background:radial-gradient(1200px 700px at 78% 18%,rgba(245,207,119,.10) 0%,transparent 55%),
              radial-gradient(900px 600px at 12% 85%,rgba(28,65,66,.7) 0%,transparent 55%),
              linear-gradient(160deg,var(--ink) 0%,var(--deep) 60%,#04191a 100%);
@@ -70,13 +70,15 @@ nav.scrolled{background:rgba(8,31,32,.94);backdrop-filter:blur(14px);box-shadow:
 .hero::before{content:"";position:absolute;inset:0;
   background-image:radial-gradient(rgba(255,255,255,.05) 1px,transparent 1px);
   background-size:26px 26px;opacity:.5;pointer-events:none}
-.pulse-line{position:absolute;left:0;right:0;top:56%;opacity:.35;pointer-events:none}
+.pulse-line{position:absolute;left:0;right:0;top:56%;height:110px;opacity:.35;pointer-events:none}
 .pulse-line path{stroke:var(--gold-light);stroke-width:2;fill:none;stroke-dasharray:2600;stroke-dashoffset:2600;
   animation:draw 6s ease-out .6s forwards}
 @keyframes draw{to{stroke-dashoffset:0}}
-.hero-inner{position:relative;z-index:2;padding:140px 48px 90px;max-width:1300px;margin:0 auto;width:100%}
-@media(max-width:700px){.hero-inner{padding:120px 24px 70px}}
-@media(max-width:480px){.hero-inner{padding:110px 20px 60px}}
+@media(max-width:700px){.pulse-line{height:150px;opacity:.4}}
+@media(max-width:480px){.pulse-line{height:180px;opacity:.45}}
+.hero-inner{position:relative;z-index:2;padding:140px 48px 90px;max-width:1300px;margin:auto;width:100%}
+@media(max-width:700px){.hero-inner{padding:120px 24px 40px}}
+@media(max-width:480px){.hero-inner{padding:110px 20px 30px}}
 .hero-kicker{letter-spacing:.3em;text-transform:uppercase;font-size:12px;color:var(--gold-light);margin-bottom:26px;
   display:flex;align-items:center;gap:14px}
 .hero-kicker::before{content:"";width:44px;height:1px;background:var(--gold-light)}
@@ -90,8 +92,9 @@ nav.scrolled{background:rgba(8,31,32,.94);backdrop-filter:blur(14px);box-shadow:
 .hero-sub{margin-top:36px;max-width:540px;color:rgba(255,255,255,.65);font-weight:300;font-size:16px;line-height:1.7}
 .hero-buttons{display:flex;gap:16px;margin-top:38px;flex-wrap:wrap}
 @media(max-width:480px){.hero-buttons{gap:12px}.hero-buttons .btn{flex:1 1 auto;justify-content:center}}
-.scroll-cue{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);z-index:2;color:rgba(255,255,255,.55);
-  font-size:11px;letter-spacing:.3em;text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:12px}
+.scroll-cue{position:relative;align-self:center;z-index:2;color:rgba(255,255,255,.55);
+  margin:14px 0 30px;font-size:11px;letter-spacing:.3em;text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:12px}
+@media(max-width:480px){.scroll-cue{margin:10px 0 22px}}
 .scroll-cue span{display:block;width:1px;height:44px;background:linear-gradient(var(--gold-light),transparent);
   animation:cue 2s ease-in-out infinite}
 @keyframes cue{0%{transform:scaleY(0);transform-origin:top}45%{transform:scaleY(1);transform-origin:top}
@@ -173,12 +176,16 @@ section{position:relative}
 .lede.on-dark{color:rgba(255,255,255,.7)}
 .btn{display:inline-flex;align-items:center;gap:12px;margin-top:38px;border:1px solid var(--ink);
   padding:15px 30px;border-radius:999px;font-size:13px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;
-  transition:background .35s,color .35s,gap .35s}
+  transition:background .2s,color .2s,gap .35s,transform .15s,box-shadow .2s;
+  cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation;user-select:none}
 .btn:hover{background:var(--ink);color:#fff;gap:18px}
+.btn:active{background:var(--ink);color:#fff;transform:scale(.95);box-shadow:0 2px 10px rgba(0,0,0,.25)}
 .btn.light{border-color:rgba(255,255,255,.5);color:#fff}
 .btn.light:hover{background:#fff;color:var(--ink)}
+.btn.light:active{background:#fff;color:var(--ink);transform:scale(.95)}
 .btn.whatsapp{border-color:#25D366;background:#25D366;color:#fff}
 .btn.whatsapp:hover{background:#1fb855;gap:18px}
+.btn.whatsapp:active{background:#189943;transform:scale(.95)}
 
 /* reveal on scroll */
 .rv{opacity:0;transform:translateY(38px);transition:opacity .9s ease,transform .9s ease}
