@@ -44,15 +44,21 @@ nav.scrolled{background:rgba(8,31,32,.94);backdrop-filter:blur(14px);box-shadow:
 .news-pill{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;
   padding:8px 18px;color:#fff;font-size:12px;letter-spacing:.08em;text-transform:uppercase;transition:background .3s,border-color .3s}
 .news-pill:hover{background:rgba(255,255,255,.08);border-color:var(--gold-light)}
-.hamburger{display:none;background:none;border:none;color:#fff;font-size:1.3rem;cursor:pointer}
+.hamburger{display:none;background:none;border:none;color:#fff;font-size:1.3rem;cursor:pointer;
+  padding:10px;margin:-10px;line-height:1}
 @media(max-width:900px){
   .nav-links{position:absolute;top:76px;left:0;right:0;background:rgba(8,31,32,.98);flex-direction:column;
-    gap:0;padding:8px 22px 18px;display:none}
+    gap:0;padding:8px 22px 18px;display:none;max-height:calc(100vh - 76px);overflow-y:auto}
   .nav-links.open{display:flex}
-  .nav-links a{padding:12px 0;border-bottom:1px solid var(--line)}
+  .nav-links a{padding:14px 0;border-bottom:1px solid var(--line);display:block}
   .news-pill{display:none}
   nav{padding:0 22px}
   .hamburger{display:block}
+}
+@media(max-width:480px){
+  .brand img{height:32px}
+  nav{padding:0 16px;height:68px}
+  .nav-links{top:68px}
 }
 
 /* ---------- HERO ---------- */
@@ -69,6 +75,8 @@ nav.scrolled{background:rgba(8,31,32,.94);backdrop-filter:blur(14px);box-shadow:
   animation:draw 6s ease-out .6s forwards}
 @keyframes draw{to{stroke-dashoffset:0}}
 .hero-inner{position:relative;z-index:2;padding:140px 48px 90px;max-width:1300px;margin:0 auto;width:100%}
+@media(max-width:700px){.hero-inner{padding:120px 24px 70px}}
+@media(max-width:480px){.hero-inner{padding:110px 20px 60px}}
 .hero-kicker{letter-spacing:.3em;text-transform:uppercase;font-size:12px;color:var(--gold-light);margin-bottom:26px;
   display:flex;align-items:center;gap:14px}
 .hero-kicker::before{content:"";width:44px;height:1px;background:var(--gold-light)}
@@ -81,6 +89,7 @@ nav.scrolled{background:rgba(8,31,32,.94);backdrop-filter:blur(14px);box-shadow:
 .hero-words li em{font-style:italic;color:var(--gold-light)}
 .hero-sub{margin-top:36px;max-width:540px;color:rgba(255,255,255,.65);font-weight:300;font-size:16px;line-height:1.7}
 .hero-buttons{display:flex;gap:16px;margin-top:38px;flex-wrap:wrap}
+@media(max-width:480px){.hero-buttons{gap:12px}.hero-buttons .btn{flex:1 1 auto;justify-content:center}}
 .scroll-cue{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);z-index:2;color:rgba(255,255,255,.55);
   font-size:11px;letter-spacing:.3em;text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:12px}
 .scroll-cue span{display:block;width:1px;height:44px;background:linear-gradient(var(--gold-light),transparent);
@@ -92,6 +101,8 @@ nav.scrolled{background:rgba(8,31,32,.94);backdrop-filter:blur(14px);box-shadow:
 .page-intro{position:relative;padding:170px 48px 90px;color:#fff;overflow:hidden;
   background:radial-gradient(1000px 600px at 80% 10%,rgba(245,207,119,.10) 0%,transparent 55%),
              linear-gradient(160deg,var(--ink) 0%,var(--deep) 60%,#04191a 100%)}
+@media(max-width:700px){.page-intro{padding:130px 24px 60px}}
+@media(max-width:480px){.page-intro{padding:118px 20px 50px}}
 .page-intro::before{content:"";position:absolute;inset:0;
   background-image:radial-gradient(rgba(255,255,255,.05) 1px,transparent 1px);
   background-size:26px 26px;opacity:.5;pointer-events:none}
@@ -108,6 +119,7 @@ nav.scrolled{background:rgba(8,31,32,.94);backdrop-filter:blur(14px);box-shadow:
 .team-card:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgba(14,62,64,.14)}
 .team-card-photo{height:260px;overflow:hidden}
 .team-card-photo img{width:100%;height:100%;object-fit:cover;object-position:top}
+@media(max-width:600px){.team-card-photo{height:320px}}
 .team-card-body{padding:20px 22px 24px}
 .team-card-body h3{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--ink)}
 .team-card-body .role{font-size:12.5px;letter-spacing:.05em;color:var(--gold-deep);text-transform:uppercase;font-weight:600;margin-top:6px}
@@ -122,6 +134,7 @@ nav.scrolled{background:rgba(8,31,32,.94);backdrop-filter:blur(14px);box-shadow:
   padding:13px 16px;font-family:'Archivo',sans-serif;font-size:14.5px;color:var(--text);background:var(--white);transition:border-color .3s}
 .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--gold)}
 .field textarea{resize:vertical;min-height:110px}
+@media(max-width:600px){.field input,.field select,.field textarea{font-size:16px}}
 .form-submit{border:none;cursor:pointer}
 .contact-info-block{margin-bottom:34px}
 .contact-info-block h4{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--ink);margin-bottom:10px}
@@ -133,6 +146,15 @@ nav.scrolled{background:rgba(8,31,32,.94);backdrop-filter:blur(14px);box-shadow:
 .form-note{font-size:12.5px;color:#4c666d;margin-top:14px}
 .form-note.sent{color:var(--gold-deep);font-weight:600}
 .map-embed{border:0;border-radius:16px}
+
+/* ---------- SERVICE DETAIL ---------- */
+.svc-detail-grid{margin-top:56px;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+@media(max-width:900px){.svc-detail-grid{grid-template-columns:1fr;gap:32px}}
+.svc-detail-grid img{width:100%;border-radius:20px;display:block}
+.svc-detail-icon{width:56px;height:56px;border-radius:16px;background:var(--mist);display:flex;align-items:center;justify-content:center;margin-bottom:22px}
+.svc-detail-icon i{color:var(--gold-deep);font-size:22px}
+.svc-detail-tagline{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:22px;color:var(--ink);margin-bottom:18px}
+.svc-detail-heading{margin:0}
 
 /* ---------- GENERIC SECTIONS ---------- */
 section{position:relative}
@@ -192,7 +214,7 @@ section{position:relative}
 .stats{margin-top:70px;display:grid;grid-template-columns:repeat(4,1fr);gap:40px}
 .stat b{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,4.2vw,58px);font-weight:500;color:var(--gold-light);display:block}
 .stat span{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.6)}
-@media(max-width:700px){.stats{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:700px){.stats{grid-template-columns:repeat(2,1fr);gap:28px;margin-top:50px}}
 
 .branch-cards{margin-top:56px;display:grid;grid-template-columns:1fr 1fr;gap:24px}
 @media(max-width:760px){.branch-cards{grid-template-columns:1fr}}
@@ -231,6 +253,7 @@ section{position:relative}
 .quote-block{background:var(--white);border:1px solid var(--line-dark);border-radius:18px;padding:40px 36px;margin-top:8px}
 .quote-block blockquote{font-family:'Cormorant Garamond',serif;font-size:22px;font-style:italic;color:var(--ink);line-height:1.5}
 .quote-block cite{display:block;margin-top:18px;font-style:normal;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:#4c666d}
+@media(max-width:600px){.quote-block{padding:28px 22px}.quote-block blockquote{font-size:19px}}
 .btn-quote{margin-top:28px}
 
 /* pillars */
@@ -257,9 +280,9 @@ footer{background:var(--deep);color:#fff}
 .foot-links-spaced{margin-top:18px}
 .foot-hours{margin-top:12px}
 .foot-social{display:flex;gap:12px;margin-top:16px}
-.foot-social a{width:34px;height:34px;border:1px solid var(--line);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:background .3s,border-color .3s}
+.foot-social a{width:38px;height:38px;border:1px solid var(--line);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:background .3s,border-color .3s}
 .foot-social a:hover{background:rgba(245,207,119,.12);border-color:var(--gold-light)}
 .foot-bottom{border-top:1px solid var(--line);padding:24px 48px;display:flex;justify-content:space-between;
   align-items:center;max-width:1200px;margin:0 auto;font-size:12.5px;color:rgba(255,255,255,.45);flex-wrap:wrap;gap:14px}
 @media(max-width:900px){.foot-top{grid-template-columns:1fr 1fr;padding:64px 24px 36px}}
-@media(max-width:560px){.foot-top{grid-template-columns:1fr}}
+@media(max-width:560px){.foot-top{grid-template-columns:1fr}.foot-bottom{padding:20px 24px;justify-content:center;text-align:center}}
