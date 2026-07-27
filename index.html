@@ -1,262 +1,314 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr" id="html-root">
+<html lang="en" dir="ltr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Canadian Physio Center by Dr. Rana Shehata — the first shoulder specialized center in Egypt & the Middle East. Canadian physio protocols, Asian alternative therapy, rehab, and osteopathy.">
-  <meta name="keywords" content="physiotherapy, shoulder specialist, spine specialist, Cairo, Sheikh Zayed, osteopathy, acupuncture, rehab">
-  <meta property="og:title" content="Canadian Physio Center — Give Your Neck to an Expert">
-  <meta property="og:type" content="website">
-  <title>Canadian Physio Center — Give Your Neck to an Expert</title>
-  <link rel="icon" type="image/png" href="https://canadianphysiocenter.com/wp-content/uploads/2025/06/cropped-Logo-resized-2-270x270.png">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://unpkg.com/lenis@1.3.25/dist/lenis.css">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/animations.css">
-  <link rel="stylesheet" href="css/responsive.css">
-  <link rel="stylesheet" href="css/brand.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Canadian Physio Center by Dr. Rana Shehata — the first shoulder specialized center in Egypt & the Middle East. Canadian physio protocols, Asian alternative therapy, rehab, and osteopathy.">
+<meta name="keywords" content="physiotherapy, shoulder specialist, spine specialist, Cairo, Sheikh Zayed, osteopathy, acupuncture, rehab">
+<meta property="og:title" content="Canadian Physio Center — Give Your Neck to an Expert">
+<meta property="og:type" content="website">
+<title>Canadian Physio Center — Give Your Neck to an Expert</title>
+<link rel="icon" type="image/png" href="https://canadianphysiocenter.com/wp-content/uploads/2025/06/cropped-Logo-resized-2-270x270.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="css/landing.css">
 </head>
 <body>
-  <div class="cursor-dot" id="cursorDot"></div>
-  <div class="cursor-outline" id="cursorOutline"></div>
-  <div class="loader" id="loader"><div class="loader-spinner"></div></div>
 
-  <!-- NAV -->
-  <nav id="navbar">
-    <div class="nav-container">
-      <a href="index.html" class="nav-logo" data-brand="logo-letter"></a>
-      <ul class="nav-links" id="navLinks">
-        <li><a href="index.html">Home</a></li>
+<!-- ================= NAV ================= -->
+<nav id="nav">
+  <a class="brand" href="index.html">
+    <img src="https://canadianphysiocenter.com/wp-content/uploads/2023/11/Logo-1-e1750602821698-1024x481.png" alt="Canadian Physio Center">
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="team.html">Our Team</a></li>
+    <li><a href="clinics.html">Our Clinics</a></li>
+    <li><a href="patient-experience.html">Patient Experience</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-cta">
+    <a class="news-pill" href="https://wa.me/201113372169" target="_blank">Book a Visit</a>
+  </div>
+  <button class="hamburger" id="hamburger" aria-label="Menu"><i class="fas fa-bars"></i></button>
+</nav>
+
+<!-- ================= HERO ================= -->
+<header class="hero">
+  <svg class="pulse-line" viewBox="0 0 1440 120" preserveAspectRatio="none">
+    <path d="M0,60 L420,60 L470,60 L500,14 L535,106 L565,38 L590,60 L1440,60"/>
+  </svg>
+  <div class="hero-inner">
+    <p class="hero-kicker">Egypt's First Shoulder Specialists</p>
+    <ul class="hero-words">
+      <li class="lead">Shoulder <em>Care</em></li>
+      <li>Spine Rehabilitation</li>
+      <li>Sports Recovery</li>
+      <li>Bone Osteopathy</li>
+    </ul>
+    <p class="hero-sub">A mix of Canadian physiotherapy protocols, Asian alternative therapy, rehab programs, and bone osteopathy — every patient gets a physical assessment first, then a customized treatment protocol.</p>
+    <div class="hero-buttons">
+      <a class="btn whatsapp" href="https://wa.me/201113372169" target="_blank"><i class="fab fa-whatsapp"></i> Book on WhatsApp</a>
+      <a class="btn light" href="services.html">View Our Services</a>
+    </div>
+  </div>
+  <div class="scroll-cue">Scroll down to discover<span></span></div>
+</header>
+
+<!-- ================= WHO WE ARE ================= -->
+<section id="WhoWeAre" class="services">
+  <div class="wrap">
+    <p class="kicker rv">Who we are</p>
+    <h2 class="big rv d1">Canadian Physio Center is the <em>first shoulder-specialized</em> physiotherapy center in Egypt &amp; the Middle East, founded by Dr. Rana Shehata.</h2>
+    <p class="lede rv d2">We assess before we treat. Every patient gets a full physical assessment first, then a customized protocol built on Canadian physio standards, Asian alternative therapy, and bone osteopathy — not guesswork.</p>
+    <a class="btn rv d3" href="team.html">Meet Dr. Rana Shehata
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- ================= WHAT WE DO ================= -->
+<section id="WhatWeDo" class="services services-alt">
+  <div class="wrap">
+    <p class="kicker rv">What we do</p>
+    <h2 class="big rv d1">Eight specialized treatment tracks, each with its own diagnosis-to-recovery protocol.</h2>
+    <p class="lede rv d2">From assessment through to full recovery, every service is built around the same diagnosis-first philosophy — internationally certified, evidence-based, and tailored to the patient in front of us.</p>
+    <div class="svc-list rv d2">
+      <a class="svc" href="services/assessment.html">
+        <span class="svc-num">01</span>
+        <h3>Assessment</h3>
+        <p>A full physical assessment to reach an accurate diagnosis before any treatment protocol is designed.</p>
+        <span class="go"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+      <a class="svc" href="services/osteopathy.html">
+        <span class="svc-num">02</span>
+        <h3>Osteopathy (Bone Alignment)</h3>
+        <p>Manual bone alignment techniques to correct structural imbalances and relieve chronic pain at the source.</p>
+        <span class="go"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+      <a class="svc" href="services/shoulder-treatments.html">
+        <span class="svc-num">03</span>
+        <h3>Shoulder Treatments</h3>
+        <p>The first shoulder-specialized treatment protocols in Egypt, built on Canadian and international rehab standards.</p>
+        <span class="go"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+      <a class="svc" href="services/sports-athletic.html">
+        <span class="svc-num">04</span>
+        <h3>Sports &amp; Athletic Services</h3>
+        <p>Injury recovery and performance rehab protocols built for competitive and recreational athletes.</p>
+        <span class="go"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+      <a class="svc" href="services/spine-injuries.html">
+        <span class="svc-num">05</span>
+        <h3>Spine Injuries</h3>
+        <p>Specialized assessment and rehab protocols for spinal injuries, disc issues, and chronic back pain.</p>
+        <span class="go"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+      <a class="svc" href="services/canadian-protocols.html">
+        <span class="svc-num">06</span>
+        <h3>Canadian Physio Protocols</h3>
+        <p>Evidence-based physiotherapy protocols certified by the Canadian Academy of Pain Management.</p>
+        <span class="go"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+      <a class="svc" href="services/asian-alternative-therapy.html">
+        <span class="svc-num">07</span>
+        <h3>Asian Alternative Therapy</h3>
+        <p>Traditional alternative therapy practices from Malaysia, Vietnam, and Indonesia, integrated with modern rehab.</p>
+        <span class="go"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+      <a class="svc" href="services/posture-correction.html">
+        <span class="svc-num">08</span>
+        <h3>Posture Correction</h3>
+        <p>Targeted correction programs for postural imbalances that cause chronic neck, shoulder, and back pain.</p>
+        <span class="go"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CLINICS / STATS ================= -->
+<section id="Clinics" class="locations">
+  <div class="wrap">
+    <p class="kicker rv on-dark">Two branches, one standard</p>
+    <h2 class="big rv d1 on-dark">New Cairo (5th Settlement) and Sheikh Zayed — <em>13+ years</em> of shoulder, spine, and sports rehab under one clinical standard.</h2>
+    <div class="fact-grid rv d2">
+      <span class="fact">Diagnosis before treatment, every time</span>
+      <span class="fact">Direct WhatsApp booking</span>
+      <span class="fact">Same-week appointments</span>
+      <span class="fact">4 international accreditations</span>
+      <span class="fact">Sat–Thu, 2PM–10PM</span>
+      <span class="fact">Pre-booking required</span>
+    </div>
+    <div class="branch-cards rv d2">
+      <div class="branch-card">
+        <h4>New Cairo (5th Settlement)</h4>
+        <p><i class="fas fa-map-marker-alt"></i> New Cairo City, New Cairo 1, Cairo Governorate</p>
+        <a class="btn light" href="https://wa.me/201113372169" target="_blank"><i class="fab fa-whatsapp"></i> +20 111 337 2169</a>
+      </div>
+      <div class="branch-card">
+        <h4>Sheikh Zayed</h4>
+        <p><i class="fas fa-map-marker-alt"></i> Zayed 4, just behind the gate plaza, Sheikh Zayed City, Giza Governorate</p>
+        <a class="btn light" href="https://wa.me/201150904759" target="_blank"><i class="fab fa-whatsapp"></i> +20 115 090 4759</a>
+      </div>
+    </div>
+    <div class="stats rv d3">
+      <div class="stat"><b data-count="13">0</b><span>Years of Experience</span></div>
+      <div class="stat"><b data-count="102000">0</b><span>Instagram Community</span></div>
+      <div class="stat"><b data-count="4">0</b><span>Accreditations</span></div>
+      <div class="stat"><b>24/7</b><span>Patient Support</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= COMMITMENT ================= -->
+<section id="Commitment" class="commit">
+  <div class="wrap">
+    <p class="kicker rv">Our commitment</p>
+    <h2 class="big rv d1">We hold every protocol to internationally certified standards — <em>diagnosis first, always.</em></h2>
+    <p class="lede rv d2">We recognize the impact our clinical decisions have on every patient who walks through our doors.</p>
+
+    <div class="block block-first rv">
+      <span class="block-num">1</span>
+      <div>
+        <h3>Our clinical standards</h3>
+        <p>Canadian Physio Center operates under protocols reviewed against the standards of the Canadian Physiotherapy Association, EUSSER (European Union for Shoulder &amp; Elbow Rehabilitation), Physio Academy New Zealand, and the General Physical Therapy Syndicate of Egypt.</p>
+        <p>Before any treatment begins, a thorough assessment is conducted for every patient. Every protocol is evidence-based and reviewed against the latest research from these accrediting bodies.</p>
+      </div>
+    </div>
+
+    <div class="block rv">
+      <span class="block-num">2</span>
+      <div>
+        <h3>Delivering accessible, patient-first care</h3>
+        <p>Our strategy connects a diagnosis-first philosophy with real accessibility — direct WhatsApp booking, same-week appointments, and two branches so patients can choose whichever is closer.</p>
+        <div class="tabs">
+          <div class="tab-btns">
+            <button class="active" data-tab="t1">Patients</button>
+            <button data-tab="t2">Our Team</button>
+            <button data-tab="t3">Standards</button>
+          </div>
+          <div class="tab-panels">
+            <div class="panel active" id="t1">
+              <p>Our impact starts with every patient who walks through our doors. We focus on:</p>
+              <ul>
+                <li>Full assessment before treatment</li>
+                <li>One-on-one treatment time</li>
+                <li>Direct WhatsApp booking</li>
+                <li>Same-week appointments</li>
+                <li>Two convenient branches</li>
+                <li>Real recovery, not just symptom relief</li>
+              </ul>
+            </div>
+            <div class="panel" id="t2">
+              <p>Nine specialists across two branches, led by founder Dr. Rana Shehata. A few of the credentials behind the team:</p>
+              <ul>
+                <li>Diploma in Pain Management, Canadian Academy of Pain Management</li>
+                <li>Member of EUSSER</li>
+                <li>Member of Shoulder Academy (New Zealand)</li>
+                <li>Mulligan Concept, levels A/B/C</li>
+                <li>Dry Needling (Prime Physio Academy)</li>
+                <li>McKenzie Approach — Orthopedic Manual Therapy</li>
+              </ul>
+            </div>
+            <div class="panel" id="t3">
+              <p>Good governance is good care. Every protocol is checked against:</p>
+              <ul>
+                <li>Canadian Physiotherapy Association</li>
+                <li>EUSSER — Shoulder &amp; Elbow Rehabilitation</li>
+                <li>Physio Academy New Zealand</li>
+                <li>General Physical Therapy Syndicate of Egypt</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="block rv">
+      <span class="block-num">3</span>
+      <div>
+        <h3>In our patients' words</h3>
+        <div class="quote-block">
+          <blockquote>"I recommend Dr. Rana Shehata clinic strongly for treating shoulder injuries — my experience in the 5th Settlement branch was very pleasant, the clinic is very comfortable, and the team is very professional and skillful."</blockquote>
+          <cite>Tamer Amin — Patient, New Cairo</cite>
+        </div>
+        <a class="btn btn-quote" href="patient-experience.html">Read More Patient Stories
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="block rv">
+      <span class="block-num">4</span>
+      <div>
+        <h3>What sets us apart</h3>
+        <p>Three principles run through every treatment plan we design.</p>
+        <div class="pillars">
+          <div class="pillar">
+            <span class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F5CF77" stroke-width="1.8"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span>
+            <h4>Diagnosis First</h4>
+            <p>Every patient gets a full physical assessment before any treatment protocol is designed — no guesswork.</p>
+          </div>
+          <div class="pillar">
+            <span class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F5CF77" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18 9 9 0 0 1 0-18"/></svg></span>
+            <h4>East Meets West</h4>
+            <p>Canadian physio protocols combined with Asian alternative therapy and acupuncture, under one roof.</p>
+          </div>
+          <div class="pillar">
+            <span class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F5CF77" stroke-width="1.8"><path d="M12 21s-7-4.6-9.5-9A5.5 5.5 0 0 1 12 6.5 5.5 5.5 0 0 1 21.5 12C19 16.4 12 21 12 21z"/></svg></span>
+            <h4>Two Convenient Branches</h4>
+            <p>New Cairo (5th Settlement) and Sheikh Zayed — pick whichever is closer, book directly on WhatsApp.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer id="Contact">
+  <div class="foot-top">
+    <div>
+      <a href="index.html"><img class="foot-logo" src="https://canadianphysiocenter.com/wp-content/uploads/2023/11/Logo-1-e1750602821698-1024x481.png" alt="Canadian Physio Center"></a>
+      <p>The first shoulder-specialized physiotherapy center in Egypt &amp; the Middle East.</p>
+      <ul class="foot-links foot-links-spaced">
         <li><a href="about.html">About</a></li>
         <li><a href="services.html">Services</a></li>
         <li><a href="team.html">Our Team</a></li>
-        <li><a href="clinics.html">Our Clinics</a></li>
         <li><a href="patient-experience.html">Patient Experience</a></li>
-        <li><a href="contact.html">Contact</a></li>
       </ul>
-      <div class="nav-actions">
-        <a href="#" class="nav-book" data-whatsapp-link target="_blank">Book Now</a>
-      </div>
-      <button class="hamburger" id="hamburger"><i class="fas fa-bars"></i></button>
-    </div>
-  </nav>
-
-  <!-- CINEMATIC SCROLL STORY — one continuous pinned scene (real elbow-flexion
-       footage, desaturated to a quiet navy/gold grade) with four short caption
-       "chapters" that crossfade as you scroll, plus a left-side progress rail.
-       Modeled on the pinned-background + fading-caption pattern used by
-       mont-fort.com. Pure CSS sticky handles the pin with zero JS; GSAP
-       ScrollTrigger (js/motion.js), when available, scrubs video.currentTime,
-       crossfades the four scenes and updates the progress rail off scroll
-       position. Without JS, scene one just sits there as a normal hero with
-       the video autoplaying/looping muted — never broken, just less alive. -->
-  <section class="story" id="home">
-    <div class="story-stage">
-      <div class="story-webgl" id="storyWebgl" aria-hidden="true"></div>
-      <!-- Local file tried first (same-origin — no hotlink risk); Pexels URL
-           is a fallback only until assets/video/elbow-flexion.mp4 exists. -->
-      <video class="story-video" autoplay muted loop playsinline preload="auto" aria-hidden="true">
-        <source src="assets/video/elbow-flexion.mp4" type="video/mp4">
-        <source src="https://videos.pexels.com/video-files/30352917/13010402_1080_1920_50fps.mp4" type="video/mp4">
-      </video>
-      <div class="story-tint" aria-hidden="true"></div>
-
-      <div class="story-scenes">
-        <div class="story-scene is-active" data-scene="0">
-          <span class="story-eyebrow" data-brand="brand-positioning"></span>
-          <h1>Give Your Neck to an Expert</h1>
-          <p>A Mix of Asian Alternative Therapy, Canadian Physio Protocols, Rehab Programs, and Bone Osteopathy</p>
-          <div class="hero-buttons">
-            <a href="#" class="btn btn-whatsapp" data-whatsapp-link target="_blank"><i class="fab fa-whatsapp"></i> Book on WhatsApp</a>
-            <a href="services.html" class="btn btn-secondary">View Our Services</a>
-          </div>
-        </div>
-        <div class="story-scene" data-scene="1">
-          <span class="story-eyebrow">Why Canadian Physio Center</span>
-          <h2>Diagnosis First. Always.</h2>
-          <p>Every patient gets a full physical assessment before any treatment protocol is designed — Canadian, European, and New Zealand accredited practitioners, not guesswork.</p>
-        </div>
-        <div class="story-scene" data-scene="2">
-          <span class="story-eyebrow">Our Focus</span>
-          <h2>East Meets West, Joint by Joint</h2>
-          <p>The first shoulder-specialized center in Egypt &amp; the Middle East — Canadian physio protocols combined with Asian alternative therapy and acupuncture.</p>
-          <div class="specialty-tags">
-            <span><span class="dot"></span>Glenohumeral Joint</span>
-            <span><span class="dot"></span>Rotator Cuff</span>
-            <span><span class="dot"></span>Cervical Spine</span>
-          </div>
-        </div>
-        <div class="story-scene" data-scene="3">
-          <span class="story-eyebrow">Two Branches, One Standard</span>
-          <h2>Ready For Your Diagnosis?</h2>
-          <p data-brand="brand-hours"></p>
-          <div class="hero-buttons">
-            <a href="#" class="btn btn-whatsapp" data-whatsapp-link target="_blank"><i class="fab fa-whatsapp"></i> Book on WhatsApp</a>
-          </div>
-        </div>
-      </div>
-
-      <button class="story-scroll-hint" id="storyScrollHint" aria-label="Scroll down" type="button"><i class="fas fa-chevron-down"></i></button>
-
-      <div class="story-progress" id="storyProgress" aria-hidden="true">
-        <span class="story-progress-dot is-active" data-dot="0"></span>
-        <span class="story-progress-dot" data-dot="1"></span>
-        <span class="story-progress-dot" data-dot="2"></span>
-        <span class="story-progress-dot" data-dot="3"></span>
-        <span class="story-progress-label" id="storyProgressLabel">Home</span>
+      <div class="foot-social">
+        <a href="https://www.instagram.com/dr.ranashehata" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.facebook.com/physiotherapy.Newcairo" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.youtube.com/channel/UCiYDU5k72U7NekRI5jyh0yA" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
       </div>
     </div>
-  </section>
-
-  <!-- TRUST / ACCREDITATION BAR -->
-  <section class="accred-bar">
-    <div class="container">
-      <div class="accred-track" id="accredTrack"><!-- populated by js/render.js from BRAND.accreditations --></div>
+    <div>
+      <h4>New Cairo</h4>
+      <p>New Cairo City<br>New Cairo 1<br>Cairo Governorate</p>
+      <a href="tel:+201113372169">P: +20 111 337 2169</a>
     </div>
-  </section>
-
-  <!-- STATS -->
-  <section class="stats section">
-    <div class="container">
-      <div class="stats-grid" id="statsGrid"><!-- populated by js/render.js from BRAND.stats --></div>
+    <div>
+      <h4>Sheikh Zayed</h4>
+      <p>Zayed 4, behind the gate plaza<br>Sheikh Zayed City<br>Giza Governorate</p>
+      <a href="tel:+201150904759">P: +20 115 090 4759</a>
     </div>
-  </section>
-
-  <!-- SERVICES -->
-  <section class="services section" id="services">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title fade-in">Our Services</h2>
-        <p class="section-subtitle fade-in">Eight specialized treatment tracks — each with its own diagnosis-to-recovery protocol</p>
-      </div>
-      <div class="services-grid" id="servicesGrid"><!-- populated by js/render.js from BRAND.services --></div>
+    <div>
+      <h4>Contact</h4>
+      <a href="mailto:info@canadianphysiocenter.com">info@canadianphysiocenter.com</a>
+      <p class="foot-hours">Sat–Thu, 2PM–10PM<br>Closed Fridays. Pre-booking required.</p>
     </div>
-  </section>
-
-  <!-- TEAM HIGHLIGHT -->
-  <section class="team section" id="team">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title fade-in">Meet Our Specialists</h2>
-        <p class="section-subtitle fade-in">Nine specialists across two branches — see the full team page for full credentials</p>
-      </div>
-      <div class="team-grid" id="teamHighlight"><!-- populated by js/render.js: first 4 of BRAND.team --></div>
-      <div class="section-cta fade-in">
-        <a href="team.html" class="btn btn-primary">Meet the Full Team</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- BRANCHES -->
-  <section class="section" id="clinics">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title fade-in">Our Clinics</h2>
-        <p class="section-subtitle fade-in" data-brand="brand-hours"></p>
-      </div>
-      <div class="branch-grid" id="branchGrid"><!-- populated by js/render.js from BRAND.locations --></div>
-    </div>
-  </section>
-
-  <!-- TESTIMONIALS -->
-  <section class="testimonials section">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title fade-in">What Our Patients Say</h2>
-        <p class="section-subtitle fade-in">Real recoveries, in their own words</p>
-      </div>
-      <div class="testimonials-grid" id="testimonialsGrid"><!-- populated by js/render.js from BRAND.testimonials --></div>
-    </div>
-  </section>
-
-  <!-- VIDEOS -->
-  <section class="section" id="videos">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title fade-in">Health Videos</h2>
-        <p class="section-subtitle fade-in">Watch Dr. Rana Shehata's latest health tips and patient stories on YouTube</p>
-      </div>
-      <div class="section-cta fade-in">
-        <a href="#" class="btn btn-primary" data-brand="social-youtube" target="_blank"><i class="fab fa-youtube"></i> Watch on YouTube</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section class="cta">
-    <div class="container">
-      <h2 class="fade-in">Ready to Get Your Diagnosis?</h2>
-      <p class="fade-in">Book your assessment today — New Cairo or Sheikh Zayed</p>
-      <div class="hero-buttons fade-in section-cta">
-        <a href="#" class="btn btn-whatsapp" data-whatsapp-link target="_blank"><i class="fab fa-whatsapp"></i> Book on WhatsApp</a>
-        <a href="contact.html" class="btn btn-primary">Booking Form</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-content">
-      <div class="footer-section">
-        <a href="index.html" class="logo footer-logo-link" data-brand="logo-letter"></a>
-        <p data-brand="brand-description"></p>
-        <div class="social-links">
-          <a href="#" data-brand="social-instagram" target="_blank"><i class="fab fa-instagram"></i></a>
-          <a href="#" data-brand="social-facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
-          <a href="#" data-brand="social-youtube" target="_blank"><i class="fab fa-youtube"></i></a>
-        </div>
-      </div>
-      <div class="footer-section">
-        <h3>Quick Links</h3>
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="services.html">Services</a></li>
-          <li><a href="team.html">Our Team</a></li>
-          <li><a href="patient-experience.html">Patient Experience</a></li>
-          <li><a href="blog.html">Health Blog</a></li>
-        </ul>
-      </div>
-      <div class="footer-section">
-        <h3>Our Clinics</h3>
-        <ul>
-          <li>New Cairo (5th Settlement)</li>
-          <li>Sheikh Zayed</li>
-        </ul>
-        <p class="footer-hours" data-brand="brand-hours"></p>
-      </div>
-      <div class="footer-section">
-        <h3>Contact</h3>
-        <p><i class="fas fa-phone"></i> +20 111 337 2169</p>
-        <p><i class="fas fa-phone"></i> +20 115 090 4759</p>
-        <p><i class="fas fa-envelope"></i> <a href="#" data-email-link data-brand="brand-email"></a></p>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>&copy; 2026 Canadian Physio Center | Designed by <a href="https://pioneersxai.github.io/" target="_blank">PioneersX ⚡</a></p>
-    </div>
-  </footer>
-
-  <a href="#" class="whatsapp-float" data-whatsapp-link target="_blank"><i class="fab fa-whatsapp"></i></a>
-  <a href="#" class="scroll-top" id="scrollTop"><i class="fas fa-arrow-up"></i></a>
-
-  <!-- STICKY BOOKING CTA -->
-  <div class="sticky-book-bar" id="stickyBookBar">
-    <span>Ready when you are — book your assessment today.</span>
-    <a href="#" class="btn btn-whatsapp" data-whatsapp-link target="_blank"><i class="fab fa-whatsapp"></i> Book Now</a>
   </div>
+  <div class="foot-bottom">
+    <span>&copy; 2026 Canadian Physio Center — All rights reserved</span>
+    <span>Designed by <a href="https://pioneersxai.github.io/" target="_blank">PioneersX ⚡</a></span>
+  </div>
+</footer>
 
-  <script src="https://unpkg.com/lenis@1.3.25/dist/lenis.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.24/vanta.fog.min.js"></script>
-  <script src="config.js"></script>
-  <script src="js/render.js"></script>
-  <script src="js/main.js"></script>
-  <script src="js/animations.js"></script>
-  <script src="js/cursor.js"></script>
-  <script src="js/nav.js"></script>
-  <script src="js/motion.js"></script>
+<script src="js/landing.js"></script>
 </body>
 </html>
