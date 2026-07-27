@@ -54,7 +54,10 @@
   <section class="story" id="home">
     <div class="story-stage">
       <div class="story-webgl" id="storyWebgl" aria-hidden="true"></div>
+      <!-- Local file tried first (same-origin — no hotlink risk); Pexels URL
+           is a fallback only until assets/video/elbow-flexion.mp4 exists. -->
       <video class="story-video" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+        <source src="assets/video/elbow-flexion.mp4" type="video/mp4">
         <source src="https://videos.pexels.com/video-files/30352917/13010402_1080_1920_50fps.mp4" type="video/mp4">
       </video>
       <div class="story-tint" aria-hidden="true"></div>
