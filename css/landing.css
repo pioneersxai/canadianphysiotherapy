@@ -70,12 +70,12 @@ nav.scrolled{background:rgba(8,31,32,.94);backdrop-filter:blur(14px);box-shadow:
 .hero::before{content:"";position:absolute;inset:0;
   background-image:radial-gradient(rgba(255,255,255,.05) 1px,transparent 1px);
   background-size:26px 26px;opacity:.5;pointer-events:none}
-.pulse-line{position:absolute;left:0;right:0;top:56%;height:110px;opacity:.35;pointer-events:none}
-.pulse-line path{stroke:var(--gold-light);stroke-width:2;fill:none;stroke-dasharray:2600;stroke-dashoffset:2600;
+.pulse-line{position:absolute;left:0;right:0;top:56%;height:90px;opacity:.35;pointer-events:none}
+.pulse-line path{stroke:var(--gold-light);stroke-width:2;fill:none;stroke-dasharray:5200;stroke-dashoffset:5200;
   animation:draw 6s ease-out .6s forwards}
 @keyframes draw{to{stroke-dashoffset:0}}
-@media(max-width:700px){.pulse-line{height:150px;opacity:.4}}
-@media(max-width:480px){.pulse-line{height:180px;opacity:.45}}
+@media(max-width:700px){.pulse-line{height:110px;opacity:.42}.pulse-line path{stroke-width:2.5}}
+@media(max-width:480px){.pulse-line{height:120px;opacity:.48}.pulse-line path{stroke-width:3}}
 .hero-inner{position:relative;z-index:2;padding:140px 48px 90px;max-width:1300px;margin:auto;width:100%}
 @media(max-width:700px){.hero-inner{padding:120px 24px 40px}}
 @media(max-width:480px){.hero-inner{padding:110px 20px 30px}}
