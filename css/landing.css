@@ -88,6 +88,52 @@ nav.scrolled{background:rgba(8,31,32,.94);backdrop-filter:blur(14px);box-shadow:
 @keyframes cue{0%{transform:scaleY(0);transform-origin:top}45%{transform:scaleY(1);transform-origin:top}
   55%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
 
+/* ---------- INNER-PAGE INTRO BAND ---------- */
+.page-intro{position:relative;padding:170px 48px 90px;color:#fff;overflow:hidden;
+  background:radial-gradient(1000px 600px at 80% 10%,rgba(245,207,119,.10) 0%,transparent 55%),
+             linear-gradient(160deg,var(--ink) 0%,var(--deep) 60%,#04191a 100%)}
+.page-intro::before{content:"";position:absolute;inset:0;
+  background-image:radial-gradient(rgba(255,255,255,.05) 1px,transparent 1px);
+  background-size:26px 26px;opacity:.5;pointer-events:none}
+.page-intro-inner{position:relative;z-index:1;max-width:1200px;margin:0 auto}
+.page-intro h1{font-size:clamp(36px,5.4vw,64px);font-weight:500;line-height:1.1;margin-top:10px}
+.page-intro h1 em{font-style:italic;color:var(--gold-light)}
+.page-intro .lede{color:rgba(255,255,255,.7);margin-top:22px}
+
+/* ---------- TEAM ---------- */
+.team-grid{margin-top:56px;display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+@media(max-width:900px){.team-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.team-grid{grid-template-columns:1fr}}
+.team-card{background:var(--white);border:1px solid var(--line-dark);border-radius:16px;overflow:hidden;transition:transform .35s,box-shadow .35s}
+.team-card:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgba(14,62,64,.14)}
+.team-card-photo{height:260px;overflow:hidden}
+.team-card-photo img{width:100%;height:100%;object-fit:cover;object-position:top}
+.team-card-body{padding:20px 22px 24px}
+.team-card-body h3{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--ink)}
+.team-card-body .role{font-size:12.5px;letter-spacing:.05em;color:var(--gold-deep);text-transform:uppercase;font-weight:600;margin-top:6px}
+.team-card-body p{font-size:13.5px;color:#4c666d;line-height:1.6;margin-top:12px;font-weight:300}
+
+/* ---------- FORM ---------- */
+.form-grid{margin-top:56px;display:grid;grid-template-columns:1fr 1fr;gap:60px}
+@media(max-width:900px){.form-grid{grid-template-columns:1fr;gap:40px}}
+.field{margin-bottom:20px}
+.field label{display:block;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);font-weight:600;margin-bottom:8px}
+.field input,.field select,.field textarea{width:100%;border:1px solid var(--line-dark);border-radius:10px;
+  padding:13px 16px;font-family:'Archivo',sans-serif;font-size:14.5px;color:var(--text);background:var(--white);transition:border-color .3s}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--gold)}
+.field textarea{resize:vertical;min-height:110px}
+.form-submit{border:none;cursor:pointer}
+.contact-info-block{margin-bottom:34px}
+.contact-info-block h4{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--ink);margin-bottom:10px}
+.contact-info-block p{color:#4c666d;font-size:14.5px;line-height:1.8;font-weight:300}
+.contact-info-block a{color:var(--gold-deep)}
+
+.form-heading{font-size:32px;margin-top:6px}
+.contact-form{margin-top:32px}
+.form-note{font-size:12.5px;color:#4c666d;margin-top:14px}
+.form-note.sent{color:var(--gold-deep);font-weight:600}
+.map-embed{border:0;border-radius:16px}
+
 /* ---------- GENERIC SECTIONS ---------- */
 section{position:relative}
 .wrap{max-width:1200px;margin:0 auto;padding:110px 48px}
